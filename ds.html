@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Structures – Unit III, IV & V | Aditya University</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="badge">Aditya University · AY 2025-26 SEM-II</div>
+  <h1>Data Structures</h1>
+  <p>Course Code: 2501CS03 &nbsp;·&nbsp; Elaborated Step-by-Step Solutions — Unit III, IV &amp; V</p>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('u3', this)">Unit III – Linked Lists</button>
+  <button class="tab-btn" onclick="switchTab('u4', this)">Unit IV – Stacks &amp; Queues</button>
+  <button class="tab-btn" onclick="switchTab('u5', this)">Unit V – Trees &amp; Graphs</button>
+</div>
+
+<div class="container">
+
+<!-- ═══════════ UNIT III ═══════════ -->
+<div id="u3" class="tab-content active">
+  <div class="unit-title">Unit III: Linked Lists</div>
+  <div class="ctrl-bar">
+    <button class="ctrl-btn" onclick="expandAll('u3')">▼ Expand All</button>
+    <button class="ctrl-btn" onclick="collapseAll('u3')">▲ Collapse All</button>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">1</div>
+      <div class="q-text">With neat diagrams, explain the following operations in Singly Linked List: a) Insert at beginning b) Insert at end c) Delete specified element d) Search given element</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="concept-box"><strong>Singly Linked List:</strong> A linear data structure where each node contains <strong>data</strong> and a <strong>next pointer</strong> to the next node. The last node points to NULL.</div>
+
+      <div class="step-group">
+        <div class="step-label">Node Structure</div>
+        <div class="step-body">
+<pre class="math">struct Node {
+    int data;
+    struct Node* next;
+};</pre>
+<pre class="math">Diagram: [data | next] → [data | next] → [data | NULL]
+          HEAD                                 TAIL</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">a) Insert at Beginning</div>
+        <div class="step-body">
+          <p><strong>Algorithm:</strong></p>
+          <p>1. Create a new node with given data.<br>
+          2. Set newNode→next = HEAD.<br>
+          3. Update HEAD = newNode.</p>
+<pre class="math">Before: HEAD → [10|→] → [20|→] → [30|NULL]
+
+newNode = [5|→]
+
+After:  HEAD → [5|→] → [10|→] → [20|→] → [30|NULL]</pre>
+<pre class="math">void insertAtBeginning(int data) {
+    Node* newNode = new Node();
+    newNode->data = data;
+    newNode->next = head;
+    head = newNode;
+}</pre>
+          <p><strong>Time Complexity:</strong> O(1)</p>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">b) Insert at End</div>
+        <div class="step-body">
+          <p><strong>Algorithm:</strong></p>
+          <p>1. Create a new node with given data; set newNode→next = NULL.<br>
+          2. If list is empty, set HEAD = newNode.<br>
+          3. Otherwise, traverse to the last node (where next = NULL).<br>
+          4. Set lastNode→next = newNode.</p>
+<pre class="math">Before: HEAD → [10|→] → [20|→] → [30|NULL]
+
+newNode = [40|NULL]
+
+After:  HEAD → [10|→] → [20|→] → [30|→] → [40|NULL]</pre>
+<pre class="math">void insertAtEnd(int data) {
+    Node* newNode = new Node();
+    newNode->data = data;
+    newNode->next = NULL;
+    if (head == NULL) { head = newNode; return; }
+    Node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+    temp->next = newNode;
+}</pre>
+          <p><strong>Time Complexity:</strong> O(n)</p>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">c) Delete Specified Element</div>
+        <div class="step-body">
+          <p><strong>Algorithm:</strong></p>
+          <p>1. If HEAD→data == key, set HEAD = HEAD→next, free old head.<br>
+          2. Traverse; keep a <em>prev</em> pointer.<br>
+          3. When current→data == key, set prev→next = current→next, free current.</p>
+<pre class="math">Delete 20 from: HEAD → [10|→] → [20|→] → [30|NULL]
+
+prev=[10], curr=[20]
+prev->next = curr->next  →  [10|→] → [30|NULL]
+
+After: HEAD → [10|→] → [30|NULL]</pre>
+<pre class="math">void deleteNode(int key) {
+    Node* temp = head, *prev = NULL;
+    if (temp != NULL && temp->data == key) {
+        head = temp->next; delete temp; return;
+    }
+    while (temp != NULL && temp->data != key) {
+        prev = temp; temp = temp->next;
+    }
+    if (temp == NULL) return; // not found
+    prev->next = temp->next;
+    delete temp;
+}</pre>
+          <p><strong>Time Complexity:</strong> O(n)</p>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">d) Search Given Element</div>
+        <div class="step-body">
+          <p><strong>Algorithm:</strong></p>
+          <p>1. Start at HEAD, maintain position counter.<br>
+          2. At each node check if data == key.<br>
+          3. If found, return position. Else move to next.<br>
+          4. If end reached (NULL), return "Not Found".</p>
+<pre class="math">Search 20 in: HEAD → [10|→] → [20|→] → [30|NULL]
+
+pos=1: 10 ≠ 20 → next
+pos=2: 20 == 20 → FOUND at position 2</pre>
+<pre class="math">bool search(int key) {
+    Node* temp = head;
+    int pos = 1;
+    while (temp != NULL) {
+        if (temp->data == key) {
+            cout << "Found at position " << pos;
+            return true;
+        }
+        temp = temp->next; pos++;
+    }
+    cout << "Not Found"; return false;
+}</pre>
+          <p><strong>Time Complexity:</strong> O(n)</p>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">All four SLL operations use a HEAD pointer and sequential traversal. Insert-beginning is O(1); rest are O(n).</div></div>
+
+    </div></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">2</div>
+      <div class="q-text">Write the algorithm and explain operations on Doubly Linked List: i) Add at beginning ii) Delete at beginning iii) Add after an item iv) Delete from end</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="concept-box"><strong>Doubly Linked List (DLL):</strong> Each node has three fields: <strong>prev pointer | data | next pointer</strong>. Allows traversal in both directions.</div>
+
+      <div class="step-group">
+        <div class="step-label">Node Structure</div>
+        <div class="step-body">
+<pre class="math">struct Node {
+    int data;
+    Node* prev;
+    Node* next;
+};
+
+Diagram: NULL ← [prev|10|next] ⇌ [prev|20|next] ⇌ [prev|30|next] → NULL
+         HEAD                                              TAIL</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">i) Add at Beginning</div>
+        <div class="step-body">
+          <p>1. Create newNode. Set newNode→prev = NULL, newNode→next = HEAD.<br>
+          2. If HEAD ≠ NULL, set HEAD→prev = newNode.<br>
+          3. HEAD = newNode.</p>
+<pre class="math">Before: HEAD → [NULL|10|→] ⇌ [←|20|NULL]
+Insert 5:
+After:  HEAD → [NULL|5|→] ⇌ [←|10|→] ⇌ [←|20|NULL]</pre>
+<pre class="math">void addAtBeginning(int data) {
+    Node* newNode = new Node();
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = head;
+    if (head != NULL) head->prev = newNode;
+    head = newNode;
+}</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">ii) Delete at Beginning</div>
+        <div class="step-body">
+          <p>1. If HEAD == NULL, list is empty; return.<br>
+          2. Store HEAD in temp. HEAD = HEAD→next.<br>
+          3. If new HEAD ≠ NULL, set HEAD→prev = NULL.<br>
+          4. Delete temp.</p>
+<pre class="math">Before: HEAD → [NULL|5|→] ⇌ [←|10|→] ⇌ [←|20|NULL]
+After:  HEAD → [NULL|10|→] ⇌ [←|20|NULL]</pre>
+<pre class="math">void deleteAtBeginning() {
+    if (head == NULL) return;
+    Node* temp = head;
+    head = head->next;
+    if (head != NULL) head->prev = NULL;
+    delete temp;
+}</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">iii) Add After a Given Item</div>
+        <div class="step-body">
+          <p>1. Traverse to find node with data == key.<br>
+          2. Create newNode. Set newNode→prev = curr, newNode→next = curr→next.<br>
+          3. If curr→next ≠ NULL, set curr→next→prev = newNode.<br>
+          4. curr→next = newNode.</p>
+<pre class="math">Insert 15 after 10:
+Before: [10] ⇌ [20]
+After:  [10] ⇌ [15] ⇌ [20]</pre>
+<pre class="math">void addAfter(int key, int data) {
+    Node* curr = head;
+    while (curr != NULL && curr->data != key)
+        curr = curr->next;
+    if (curr == NULL) return;
+    Node* newNode = new Node();
+    newNode->data = data;
+    newNode->next = curr->next;
+    newNode->prev = curr;
+    if (curr->next != NULL) curr->next->prev = newNode;
+    curr->next = newNode;
+}</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">iv) Delete from End</div>
+        <div class="step-body">
+          <p>1. If HEAD == NULL, return. If HEAD→next == NULL, delete HEAD, HEAD = NULL.<br>
+          2. Traverse to the last node (where next == NULL).<br>
+          3. Set second-last node's next = NULL. Delete last node.</p>
+<pre class="math">Before: [10] ⇌ [20] ⇌ [30|NULL]
+After:  [10] ⇌ [20|NULL]</pre>
+<pre class="math">void deleteFromEnd() {
+    if (head == NULL) return;
+    Node* temp = head;
+    if (head->next == NULL) { delete head; head = NULL; return; }
+    while (temp->next != NULL) temp = temp->next;
+    temp->prev->next = NULL;
+    delete temp;
+}</pre>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">DLL maintains both prev and next pointers. All operations require careful update of both links to avoid broken chain.</div></div>
+
+    </div></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">3</div>
+      <div class="q-text">a) Explain how a singly linked list can be reversed. &nbsp; b) List and explain applications of linked list.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="step-group">
+        <div class="step-label">a) Reversing a Singly Linked List</div>
+        <div class="step-body">
+          <p><strong>Concept:</strong> We reverse the direction of all next pointers using three pointers: <em>prev</em>, <em>curr</em>, and <em>next</em>.</p>
+          <p><strong>Algorithm:</strong></p>
+          <p>1. Initialize: prev = NULL, curr = HEAD, next = NULL.<br>
+          2. While curr ≠ NULL:<br>
+          &emsp;a. next = curr→next &nbsp;&nbsp;&nbsp;&nbsp; (save next node)<br>
+          &emsp;b. curr→next = prev &nbsp;&nbsp;&nbsp;&nbsp; (reverse the link)<br>
+          &emsp;c. prev = curr &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (move prev forward)<br>
+          &emsp;d. curr = next &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (move curr forward)<br>
+          3. HEAD = prev.</p>
+<pre class="math">Original: HEAD → [1] → [2] → [3] → [4] → NULL
+
+Step 1: prev=NULL, curr=[1]
+  next=[2], [1]→NULL, prev=[1], curr=[2]
+
+Step 2: prev=[1], curr=[2]
+  next=[3], [2]→[1], prev=[2], curr=[3]
+
+Step 3: prev=[2], curr=[3]
+  next=[4], [3]→[2], prev=[3], curr=[4]
+
+Step 4: prev=[3], curr=[4]
+  next=NULL, [4]→[3], prev=[4], curr=NULL
+
+HEAD = prev = [4]
+Reversed: HEAD → [4] → [3] → [2] → [1] → NULL</pre>
+<pre class="math">void reverse() {
+    Node* prev = NULL, *curr = head, *next = NULL;
+    while (curr != NULL) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    head = prev;
+}</pre>
+          <p><strong>Time Complexity:</strong> O(n) &nbsp;&nbsp; <strong>Space Complexity:</strong> O(1)</p>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">b) Applications of Linked List</div>
+        <div class="step-body">
+          <p><strong>1. Implementation of Stacks and Queues:</strong> Linked lists are used to implement dynamic stacks and queues where size is not fixed in advance. Push/pop and enqueue/dequeue map directly to insert/delete at ends.</p>
+          <p><strong>2. Polynomial Representation:</strong> Each node stores a (coefficient, exponent) pair. Addition and multiplication of polynomials become node-level operations.</p>
+<pre class="math">3x² + 5x + 6  →  [3|2|→] → [5|1|→] → [6|0|NULL]</pre>
+          <p><strong>3. Implementation of Graphs (Adjacency List):</strong> Each vertex has a linked list of its adjacent vertices. Efficient for sparse graphs.</p>
+          <p><strong>4. Dynamic Memory Allocation:</strong> OS maintains a free-list of memory blocks as a linked list. malloc/free operations use this list.</p>
+          <p><strong>5. Music/Image Playlist:</strong> Songs or images in a media player are stored as a doubly linked list to support next/previous navigation.</p>
+          <p><strong>6. Undo/Redo Functionality:</strong> Text editors maintain a linked list of states to support undo/redo operations.</p>
+          <p><strong>7. Hash Chaining:</strong> In hash tables, each bucket contains a linked list to handle collisions.</p>
+          <p><strong>8. LRU Cache Implementation:</strong> Doubly linked list combined with a hash map implements Least Recently Used cache efficiently.</p>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">Reversal uses three pointers in O(n) time O(1) space. Linked lists are fundamental to stacks, queues, graphs, OS memory management, and caching.</div></div>
+
+    </div></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">4</div>
+      <div class="q-text">Write the Pseudo code to perform all standard operations on Circular Linked List with neat diagrams.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="concept-box"><strong>Circular Linked List (CLL):</strong> Similar to SLL but the <strong>last node's next pointer points back to HEAD</strong> instead of NULL. There is no NULL terminator.</div>
+
+      <div class="step-group">
+        <div class="step-label">Structure and Diagram</div>
+        <div class="step-body">
+<pre class="math">struct Node {
+    int data;
+    Node* next;
+};
+
+Diagram:
+HEAD → [10|→] → [20|→] → [30|→] → [40|→]
+         ↑___________________________________|
+         (last node points back to HEAD)</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">Operation 1: Insert at Beginning</div>
+        <div class="step-body">
+          <p>1. Create newNode.<br>
+          2. If list empty: newNode→next = newNode; HEAD = newNode; return.<br>
+          3. Traverse to last node (where last→next == HEAD).<br>
+          4. newNode→next = HEAD; last→next = newNode; HEAD = newNode.</p>
+<pre class="math">Before: HEAD→[10]→[20]→[30]→(back to HEAD)
+Insert 5:
+After:  HEAD→[5]→[10]→[20]→[30]→(back to HEAD)</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">Operation 2: Insert at End</div>
+        <div class="step-body">
+          <p>1. Create newNode.<br>
+          2. If empty: newNode→next = newNode; HEAD = newNode; return.<br>
+          3. Traverse to last node (last→next == HEAD).<br>
+          4. newNode→next = HEAD; last→next = newNode.</p>
+<pre class="math">Before: HEAD→[10]→[20]→[30]→(back to HEAD)
+Insert 40:
+After:  HEAD→[10]→[20]→[30]→[40]→(back to HEAD)</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">Operation 3: Delete a Node</div>
+        <div class="step-body">
+          <p>1. If empty, return.<br>
+          2. If HEAD is the only node and HEAD→data == key: HEAD = NULL; return.<br>
+          3. If HEAD→data == key: find last node; last→next = HEAD→next; HEAD = HEAD→next; delete old head; return.<br>
+          4. Otherwise, traverse to find node with matching data and link prev→next = curr→next; delete curr.</p>
+<pre class="math">Delete 20 from: HEAD→[10]→[20]→[30]→(back to HEAD)
+prev=[10], curr=[20]
+[10]->next = [30]
+After: HEAD→[10]→[30]→(back to HEAD)</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">Operation 4: Traversal / Display</div>
+        <div class="step-body">
+          <p>1. If HEAD == NULL, print "Empty".<br>
+          2. Start at HEAD, print data.<br>
+          3. Move to next; repeat until we reach HEAD again.</p>
+<pre class="math">void display() {
+    if (head == NULL) { cout << "Empty"; return; }
+    Node* temp = head;
+    do {
+        cout << temp->data << " ";
+        temp = temp->next;
+    } while (temp != head);
+}</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">Operation 5: Search</div>
+        <div class="step-body">
+          <p>1. Start at HEAD. Use do-while to visit each node once.<br>
+          2. Compare data with key. If match found, return true.<br>
+          3. If we loop back to HEAD without finding, return false.</p>
+<pre class="math">bool search(int key) {
+    if (head == NULL) return false;
+    Node* temp = head;
+    do {
+        if (temp->data == key) return true;
+        temp = temp->next;
+    } while (temp != head);
+    return false;
+}</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">Advantages of Circular Linked List</div>
+        <div class="step-body">
+          <p>• Any node can be a starting point.<br>
+          • Useful in round-robin scheduling (OS processes).<br>
+          • Traversal never needs NULL checks.<br>
+          • Efficient for circular queue implementation.</p>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">CLL has no NULL — last node links back to HEAD. All operations use do-while loop to detect full traversal. Used in OS scheduling and circular buffers.</div></div>
+
+    </div></div>
+  </div>
+
+</div><!-- end u3 -->
+
+
+<!-- ═══════════ UNIT IV ═══════════ -->
+<div id="u4" class="tab-content">
+  <div class="unit-title">Unit IV: Stacks &amp; Queues</div>
+  <div class="ctrl-bar">
+    <button class="ctrl-btn" onclick="expandAll('u4')">▼ Expand All</button>
+    <button class="ctrl-btn" onclick="collapseAll('u4')">▲ Collapse All</button>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">1</div>
+      <div class="q-text">a) Explain implementation of Stacks using array and operations. &nbsp; b) Explain evaluation of postfix expression using stack with example.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="step-group">
+        <div class="step-label">a) Stack Using Array</div>
+        <div class="step-body">
+          <div class="concept-box"><strong>Stack:</strong> A linear data structure that follows <strong>LIFO</strong> (Last In First Out) principle. All insertions and deletions occur at one end called the <strong>TOP</strong>.</div>
+          <p><strong>Array Representation:</strong></p>
+<pre class="math">#define MAX 100
+int stack[MAX];
+int top = -1;   // Empty stack indicator</pre>
+          <p><strong>Push Operation:</strong></p>
+<pre class="math">void push(int data) {
+    if (top == MAX - 1) {
+        cout << "Stack Overflow!"; return;
+    }
+    stack[++top] = data;
+}
+
+Trace: Push 10, 20, 30
+top=-1 → push(10) → stack[0]=10, top=0
+         push(20) → stack[1]=20, top=1
+         push(30) → stack[2]=30, top=2
+
+Stack: [10, 20, 30]
+              ↑ TOP (index 2)</pre>
+          <p><strong>Pop Operation:</strong></p>
+<pre class="math">int pop() {
+    if (top == -1) {
+        cout << "Stack Underflow!"; return -1;
+    }
+    return stack[top--];
+}
+
+pop() → returns 30, top=1
+pop() → returns 20, top=0</pre>
+          <p><strong>Peek / Top:</strong></p>
+<pre class="math">int peek() {
+    if (top == -1) return -1;
+    return stack[top];
+}
+isEmpty(): return (top == -1)
+isFull():  return (top == MAX-1)</pre>
+          <p><strong>Time Complexity:</strong> Push = O(1), Pop = O(1), Peek = O(1)</p>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">b) Evaluation of Postfix Expression Using Stack</div>
+        <div class="step-body">
+          <div class="concept-box"><strong>Postfix:</strong> Operators come AFTER their operands. No parentheses needed. Example: A B + C * means (A+B)*C.</div>
+          <p><strong>Algorithm:</strong></p>
+          <p>1. Scan the postfix expression left to right.<br>
+          2. If operand → PUSH onto stack.<br>
+          3. If operator → POP two operands (op2 first, op1 second), apply operator, PUSH result.<br>
+          4. Final answer is the top of the stack.</p>
+          <p><strong>Example:</strong> Evaluate &nbsp; <code>6 2 3 + - 3 8 2 / + *</code></p>
+<pre class="math">Token   Action            Stack
+6       Push 6            [6]
+2       Push 2            [6, 2]
+3       Push 3            [6, 2, 3]
++       pop 3,2 → 2+3=5   [6, 5]
+-       pop 5,6 → 6-5=1   [1]
+3       Push 3            [1, 3]
+8       Push 8            [1, 3, 8]
+2       Push 2            [1, 3, 8, 2]
+/       pop 2,8 → 8/2=4   [1, 3, 4]
++       pop 4,3 → 3+4=7   [1, 7]
+*       pop 7,1 → 1*7=7   [7]
+
+Result = 7</pre>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">Stack array uses top=-1 for empty. Postfix evaluation scans left to right: push operands, pop two for each operator, push result.</div></div>
+
+    </div></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">2</div>
+      <div class="q-text">a) What is Queue? Write algorithm for enqueue and dequeue with example. &nbsp; b) Write algorithm for circular queue enqueue and dequeue with example.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="step-group">
+        <div class="step-label">a) Queue – Enqueue and Dequeue</div>
+        <div class="step-body">
+          <div class="concept-box"><strong>Queue:</strong> A linear data structure that follows <strong>FIFO</strong> (First In First Out). Insertion (Enqueue) at REAR, Deletion (Dequeue) at FRONT.</div>
+<pre class="math">#define MAX 5
+int queue[MAX];
+int front = -1, rear = -1;</pre>
+          <p><strong>Enqueue Algorithm:</strong></p>
+<pre class="math">void enqueue(int data) {
+    if (rear == MAX - 1) { cout << "Queue Full"; return; }
+    if (front == -1) front = 0;   // first insertion
+    queue[++rear] = data;
+}</pre>
+          <p><strong>Dequeue Algorithm:</strong></p>
+<pre class="math">int dequeue() {
+    if (front == -1 || front > rear) {
+        cout << "Queue Empty"; return -1;
+    }
+    int val = queue[front++];
+    if (front > rear) front = rear = -1;  // reset if empty
+    return val;
+}</pre>
+          <p><strong>Trace Example:</strong></p>
+<pre class="math">Enqueue 10, 20, 30, 40:
+front=0, rear=3
+Queue: [10, 20, 30, 40]
+        ↑front        ↑rear
+
+Dequeue → returns 10, front=1
+Queue: [_, 20, 30, 40]
+           ↑front  ↑rear
+
+Dequeue → returns 20, front=2
+Queue: [_, _, 30, 40]
+              ↑front ↑rear</pre>
+          <p><strong>Problem:</strong> Even if front has moved, the rear can't use those empty slots — <em>wasted space</em>. This is fixed by Circular Queue.</p>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">b) Circular Queue – Enqueue and Dequeue</div>
+        <div class="step-body">
+          <div class="concept-box"><strong>Circular Queue:</strong> Uses modular arithmetic so that rear wraps around to the beginning when it reaches MAX-1. Solves the wasted space problem of linear queue.</div>
+<pre class="math">#define MAX 5
+int cq[MAX];
+int front = -1, rear = -1;</pre>
+          <p><strong>Enqueue:</strong></p>
+<pre class="math">void enqueue(int data) {
+    if ((rear + 1) % MAX == front) { cout << "Full"; return; }
+    if (front == -1) { front = rear = 0; }
+    else rear = (rear + 1) % MAX;
+    cq[rear] = data;
+}</pre>
+          <p><strong>Dequeue:</strong></p>
+<pre class="math">int dequeue() {
+    if (front == -1) { cout << "Empty"; return -1; }
+    int val = cq[front];
+    if (front == rear) { front = rear = -1; }  // last element
+    else front = (front + 1) % MAX;
+    return val;
+}</pre>
+          <p><strong>Circular Trace (MAX=5):</strong></p>
+<pre class="math">Enqueue 10,20,30,40: front=0, rear=3
+Dequeue → 10: front=1
+Dequeue → 20: front=2
+Enqueue 50: rear=(3+1)%5=4  →  [_,_,30,40,50]
+Enqueue 60: rear=(4+1)%5=0  →  [60,_,30,40,50]  ← wrap around!
+front=2, rear=0 (wraps around)</pre>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">Linear queue wastes space after dequeue. Circular queue uses (index+1)%MAX to wrap rear around, utilizing all slots efficiently.</div></div>
+
+    </div></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">3</div>
+      <div class="q-text">a) Explain operations on Circular Queue with diagrams. &nbsp; b) Explain any two types of queues with examples.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="step-group">
+        <div class="step-label">a) Circular Queue – All Operations with Diagrams</div>
+        <div class="step-body">
+          <p><strong>Full Condition:</strong> (rear + 1) % MAX == front<br>
+          <strong>Empty Condition:</strong> front == -1</p>
+<pre class="math">Circular Queue with MAX=6, initially empty:
+
+   [_][_][_][_][_][_]
+    0  1  2  3  4  5
+front=-1, rear=-1
+
+--- Enqueue 10,20,30,40 ---
+   [10][20][30][40][_][_]
+     0   1   2   3  4  5
+front=0, rear=3
+
+--- Dequeue (removes 10,20) ---
+   [__][__][30][40][_][_]
+     0   1   2   3  4  5
+front=2, rear=3
+
+--- Enqueue 50,60,70 (wraps!) ---
+   [60][70][30][40][50][_]
+     0   1   2   3   4  5
+front=2, rear=1  ← wrap-around occurred
+
+--- Full? (1+1)%6=2 == front=2 → YES, Queue Full ---
+
+--- Dequeue (removes 30,40,50) ---
+front moves: 2→3→4→5
+
+--- Display: traverse from front to rear circularly ---
+while (i != rear) { print cq[i]; i=(i+1)%MAX; }
+print cq[rear];</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">b) Two Types of Queues</div>
+        <div class="step-body">
+          <p><strong>Type 1: Double-Ended Queue (Deque)</strong></p>
+          <div class="concept-box">Insertions and deletions are allowed at <strong>both ends</strong> (front and rear). Two variants: Input-restricted deque (insert only at rear) and Output-restricted deque (delete only at front).</div>
+<pre class="math">Operations:
+  insertFront(x)  – insert at front
+  insertRear(x)   – insert at rear
+  deleteFront()   – delete from front
+  deleteRear()    – delete from rear
+
+Example:
+  Start:   [ ]
+  insertRear(10)  → [10]
+  insertRear(20)  → [10, 20]
+  insertFront(5)  → [5, 10, 20]
+  deleteRear()    → [5, 10]     (removes 20)
+  deleteFront()   → [10]        (removes 5)
+
+Application: Sliding window problems, palindrome checking.</pre>
+
+          <p><strong>Type 2: Priority Queue</strong></p>
+          <div class="concept-box">Each element has a <strong>priority value</strong>. Element with the highest priority is dequeued first, regardless of insertion order.</div>
+<pre class="math">Example (min-priority = highest priority):
+
+Insert: (Task A, priority=3), (Task B, priority=1), (Task C, priority=2)
+
+Internal order by priority:
+Priority Queue: [(B,1), (C,2), (A,3)]
+
+Dequeue → (B,1)  ← lowest number = highest priority
+Dequeue → (C,2)
+Dequeue → (A,3)
+
+Implementation: Min-Heap or sorted array
+Application: CPU scheduling, Dijkstra's algorithm, Huffman coding.</pre>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">Circular queue eliminates wasted space via modular arithmetic. Deque allows both-end operations; Priority queue serves highest-priority elements first.</div></div>
+
+    </div></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">4</div>
+      <div class="q-text">a) Convert infix A+(B*C-(D/E^F)*G)*H to postfix using stack, showing each step. &nbsp; b) Algorithm to evaluate postfix and evaluate ABC*+D+ where A=2,B=3,C=4,D=5.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="step-group">
+        <div class="step-label">Operator Precedence &amp; Associativity</div>
+        <div class="step-body">
+<pre class="math">Operator   Precedence   Associativity
+  ^            3          Right to Left
+  * /          2          Left to Right
+  + -          1          Left to Right
+  (            0          —</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">a) Infix to Postfix Conversion: A+(B*C-(D/E^F)*G)*H</div>
+        <div class="step-body">
+<pre class="math">Token   Stack (bottom→top)   Output
+A       []                   A
++       [+]                  A
+(       [+, (]               A
+B       [+, (]               A B
+*       [+, (, *]            A B
+C       [+, (, *]            A B C
+-       [+, (, -]            A B C *   (pop * since * > -)
+(       [+, (, -, (]         A B C *
+D       [+, (, -, (]         A B C * D
+/       [+, (, -, (, /]      A B C * D
+E       [+, (, -, (, /]      A B C * D E
+^       [+, (, -, (, /, ^]   A B C * D E
+F       [+, (, -, (, /, ^]   A B C * D E F
+)       [+, (, -]            A B C * D E F ^ /  (pop until '(')
+*       [+, (, -, *]         A B C * D E F ^ /  (* > nothing to pop on -)
+G       [+, (, -, *]         A B C * D E F ^ / G
+)       [+]                  A B C * D E F ^ / G * -  (pop until '(')
+*       [+, *]               A B C * D E F ^ / G * -  (* > +)
+H       [+, *]               A B C * D E F ^ / G * - H
+EOF     []                   A B C * D E F ^ / G * - H * +</pre>
+          <p><strong>Result:</strong> &nbsp;<code>A B C * D E F ^ / G * - H * +</code></p>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">b) Postfix Evaluation Algorithm</div>
+        <div class="step-body">
+          <p><strong>Algorithm:</strong></p>
+          <p>1. Initialize empty stack.<br>
+          2. Scan expression left to right.<br>
+          3. If operand → PUSH it.<br>
+          4. If operator → POP op2, POP op1. Compute (op1 operator op2). PUSH result.<br>
+          5. Final stack top = answer.</p>
+          <p><strong>Evaluate: ABC*+D+ where A=2, B=3, C=4, D=5</strong></p>
+<pre class="math">Replace: 2 3 4 * + 5 +
+
+Token   Action              Stack
+2       Push 2              [2]
+3       Push 3              [2, 3]
+4       Push 4              [2, 3, 4]
+*       pop 4,3 → 3*4=12    [2, 12]
++       pop 12,2 → 2+12=14  [14]
+5       Push 5              [14, 5]
++       pop 5,14 → 14+5=19  [19]
+
+Result = 19</pre>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">Postfix of A+(B*C-(D/E^F)*G)*H is A B C * D E F ^ / G * - H * +. Postfix evaluation of ABC*+D+ (A=2,B=3,C=4,D=5) = 19.</div></div>
+
+    </div></div>
+  </div>
+
+</div><!-- end u4 -->
+
+
+<!-- ═══════════ UNIT V ═══════════ -->
+<div id="u5" class="tab-content">
+  <div class="unit-title">Unit V: Trees &amp; Graphs</div>
+  <div class="ctrl-bar">
+    <button class="ctrl-btn" onclick="expandAll('u5')">▼ Expand All</button>
+    <button class="ctrl-btn" onclick="collapseAll('u5')">▲ Collapse All</button>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">1</div>
+      <div class="q-text">a) Define binary tree and explain its properties. &nbsp; b) Explain insertion operation on Binary Search Tree with example.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="step-group">
+        <div class="step-label">a) Binary Tree – Definition and Properties</div>
+        <div class="step-body">
+          <div class="concept-box"><strong>Binary Tree:</strong> A hierarchical data structure in which each node has at most <strong>two children</strong> — referred to as the <em>left child</em> and the <em>right child</em>.</div>
+<pre class="math">Node Structure:
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+Example Binary Tree:
+           1          ← Root (Level 0)
+          / \
+         2   3        ← Level 1
+        / \   \
+       4   5   6      ← Level 2 (Leaf nodes: 4,5,6)</pre>
+          <p><strong>Properties of Binary Tree:</strong></p>
+          <p><strong>1. Max nodes at level i:</strong> 2^i &nbsp; (root is level 0)<br>
+          <em>Example:</em> Level 2 can have at most 2² = 4 nodes.</p>
+          <p><strong>2. Max total nodes in tree of height h:</strong> 2^(h+1) − 1<br>
+          <em>Example:</em> Height 2 tree → max 2³−1 = 7 nodes.</p>
+          <p><strong>3. Min height for n nodes:</strong> ⌊log₂n⌋</p>
+          <p><strong>4. Number of leaf nodes = Number of internal nodes with 2 children + 1</strong></p>
+          <p><strong>5. A strictly binary tree</strong> has every node with 0 or 2 children (never 1).</p>
+          <p><strong>6. A complete binary tree</strong> has all levels full except possibly the last, filled left to right.</p>
+          <p><strong>7. A full/perfect binary tree</strong> has all leaf nodes at the same level; all internal nodes have exactly 2 children.</p>
+          <p><strong>Types:</strong><br>
+          • <em>Full Binary Tree:</em> Every node has 0 or 2 children.<br>
+          • <em>Complete Binary Tree:</em> All levels full; last level left-to-right filled.<br>
+          • <em>Perfect Binary Tree:</em> All internal nodes have 2 children; all leaves at same level.<br>
+          • <em>Skewed Binary Tree:</em> All nodes have only one child (left-skewed or right-skewed).</p>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">b) BST Insertion Operation</div>
+        <div class="step-body">
+          <div class="concept-box"><strong>Binary Search Tree (BST):</strong> For every node N: <em>all nodes in left subtree &lt; N</em>, and <em>all nodes in right subtree &gt; N</em>.</div>
+          <p><strong>Insertion Algorithm:</strong></p>
+          <p>1. If root == NULL, new node becomes root.<br>
+          2. If data &lt; root→data → go to left subtree recursively.<br>
+          3. If data &gt; root→data → go to right subtree recursively.<br>
+          4. Insert when NULL position found.</p>
+<pre class="math">Node* insert(Node* root, int key) {
+    if (root == NULL) {
+        Node* newNode = new Node();
+        newNode->data = key;
+        newNode->left = newNode->right = NULL;
+        return newNode;
+    }
+    if (key < root->data)
+        root->left = insert(root->left, key);
+    else if (key > root->data)
+        root->right = insert(root->right, key);
+    return root;
+}</pre>
+          <p><strong>Example: Insert 50, 30, 70, 20, 40, 60, 80</strong></p>
+<pre class="math">Insert 50:        50
+Insert 30:        50
+                 /
+                30
+Insert 70:        50
+                 /  \
+                30   70
+Insert 20:        50
+                 /  \
+                30   70
+               /
+              20
+Insert 40:        50
+                 /  \
+                30   70
+               /  \
+              20   40
+Insert 60,80:     50
+                 /  \
+                30   70
+               /  \  / \
+              20  40 60  80</pre>
+          <p><strong>Time Complexity:</strong> Average O(log n), Worst O(n) (skewed tree)</p>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">Binary tree has at most 2 children per node. BST maintains left &lt; root &lt; right. Insertion follows comparison at each level until empty spot found.</div></div>
+
+    </div></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">2</div>
+      <div class="q-text">a) Construct BST for: 55,42,89,34,67,78,40,22,12,56,88,65,26,98,102 &nbsp; b) Construct binary tree from Inorder {4,8,2,5,1,6,3,7} and Postorder {8,4,5,2,6,7,3,1}.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="step-group">
+        <div class="step-label">a) BST Construction: 55,42,89,34,67,78,40,22,12,56,88,65,26,98,102</div>
+        <div class="step-body">
+<pre class="math">Insert 55  → Root: 55
+Insert 42  → 42 < 55 → left of 55
+Insert 89  → 89 > 55 → right of 55
+Insert 34  → 34 < 55, 34 < 42 → left of 42
+Insert 67  → 67 > 55, 67 < 89 → left of 89
+Insert 78  → 78 > 55, 78 < 89, 78 > 67 → right of 67
+Insert 40  → 40 < 55, 40 < 42, 40 > 34 → right of 34
+Insert 22  → 22 < 55, 22 < 42, 22 < 34 → left of 34
+Insert 12  → 12 < 55, 12 < 42, 12 < 34, 12 < 22 → left of 22
+Insert 56  → 56 > 55, 56 < 89, 56 < 67 → left of 67
+Insert 88  → 88 > 55, 88 < 89, 88 > 67, 88 > 78 → right of 78
+Insert 65  → 65 > 55, 65 < 89, 65 < 67 → left of 67 → but 56 is there
+             → 65 > 56 → right of 56
+Insert 26  → 26 < 55, 26 < 42, 26 < 34, 26 > 22 → right of 22
+Insert 98  → 98 > 55, 98 > 89 → right of 89
+Insert 102 → 102 > 55, 102 > 89, 102 > 98 → right of 98
+
+Final BST:
+                        55
+                      /    \
+                    42       89
+                   /        /  \
+                 34        67   98
+                / \       /  \    \
+               22  40   56   78   102
+              /  \    \       \
+             12  26   65      88</pre>
+          <p><strong>BST Property Verification:</strong> Inorder traversal gives sorted order: 12,22,26,34,40,42,55,56,65,67,78,88,89,98,102 ✓</p>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">b) Construct Binary Tree from Inorder and Postorder Traversals</div>
+        <div class="step-body">
+          <div class="concept-box"><strong>Key Rule:</strong> The <em>last element of Postorder</em> is always the <strong>root</strong>. Locate it in Inorder to split left and right subtrees.</div>
+<pre class="math">Inorder (IN):   [4, 8, 2, 5, 1, 6, 3, 7]
+Postorder (PO): [8, 4, 5, 2, 6, 7, 3, 1]
+
+Step 1: Root = PO last = 1
+  IN: [4,8,2,5 | 1 | 6,3,7]
+        Left subtree  Right subtree
+  Left IN = [4,8,2,5], Left PO = [8,4,5,2]
+  Right IN = [6,3,7],  Right PO = [6,7,3]
+
+Step 2: Left subtree root = PO last = 2
+  IN: [4,8 | 2 | 5]
+  Left IN = [4,8], Left PO = [8,4]
+  Right IN = [5],  Right PO = [5]
+
+Step 3: Node 2's left subtree root = PO last = 4
+  IN: [4,8]  split around 4 → Left=[], Right=[8]
+  So 4 has no left child; right child = 8
+
+Step 4: Node 2's right subtree = [5] → leaf node 5
+
+Step 5: Right subtree of 1: root = PO last = 3
+  IN: [6 | 3 | 7]
+  Left IN=[6], Left PO=[6] → leaf node 6
+  Right IN=[7], Right PO=[7] → leaf node 7
+
+Final Tree:
+             1
+           /   \
+          2     3
+         / \   / \
+        4   5 6   7
+         \
+          8</pre>
+          <p><strong>Verification:</strong><br>
+          Inorder of tree: 4,8,2,5,1,6,3,7 ✓<br>
+          Postorder of tree: 8,4,5,2,6,7,3,1 ✓</p>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">BST insertions follow left&lt;root&lt;right rule. For traversal reconstruction: postorder's last element is root; its position in inorder divides left/right subtrees.</div></div>
+
+    </div></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">3</div>
+      <div class="q-text">a) Define Graph and explain two graph representation methods with examples. &nbsp; b) Data structure used in BFS and step-by-step BFS traversal.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="step-group">
+        <div class="step-label">a) Graph and Its Representations</div>
+        <div class="step-body">
+          <div class="concept-box"><strong>Graph G = (V, E):</strong> A non-linear data structure consisting of a set of <strong>Vertices (V)</strong> (nodes) and a set of <strong>Edges (E)</strong> (connections between vertices).</div>
+          <p><strong>Types:</strong> Directed (Digraph) / Undirected, Weighted / Unweighted, Connected / Disconnected.</p>
+          <p><strong>Example Graph:</strong></p>
+<pre class="math">Vertices: {A, B, C, D, E}
+Edges (undirected): {(A,B), (A,C), (B,D), (C,D), (D,E)}
+
+     A
+    / \
+   B   C
+    \ /
+     D
+     |
+     E</pre>
+          <p><strong>Representation 1: Adjacency Matrix</strong></p>
+<pre class="math">A 2D array M of size V×V where:
+M[i][j] = 1 if edge exists between vertex i and j
+M[i][j] = 0 otherwise
+
+     A  B  C  D  E
+A  [ 0  1  1  0  0 ]
+B  [ 1  0  0  1  0 ]
+C  [ 1  0  0  1  0 ]
+D  [ 0  1  1  0  1 ]
+E  [ 0  0  0  1  0 ]
+
+Space Complexity: O(V²)
+Advantage: O(1) edge lookup
+Disadvantage: Wastes space for sparse graphs</pre>
+          <p><strong>Representation 2: Adjacency List</strong></p>
+<pre class="math">Each vertex has a linked list of its neighbors.
+
+A → [B] → [C] → NULL
+B → [A] → [D] → NULL
+C → [A] → [D] → NULL
+D → [B] → [C] → [E] → NULL
+E → [D] → NULL
+
+Space Complexity: O(V + E)
+Advantage: Efficient for sparse graphs
+Disadvantage: O(V) for edge lookup (worst case)</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">b) BFS – Data Structure and Traversal</div>
+        <div class="step-body">
+          <div class="concept-box"><strong>BFS uses a QUEUE</strong> (FIFO). It visits all vertices at the current depth before going to the next level — hence called "breadth-first".</div>
+          <p><strong>BFS Algorithm:</strong></p>
+<pre class="math">void BFS(int start) {
+    visited[start] = true;
+    queue.enqueue(start);
+    while (!queue.isEmpty()) {
+        int v = queue.dequeue();
+        print(v);
+        for each neighbor u of v:
+            if (!visited[u]) {
+                visited[u] = true;
+                queue.enqueue(u);
+            }
+    }
+}</pre>
+          <p><strong>BFS Trace on Graph:</strong></p>
+<pre class="math">Graph (Adjacency List):
+1 → 2, 3
+2 → 1, 4, 5
+3 → 1, 6
+4 → 2
+5 → 2
+6 → 3
+
+BFS from vertex 1:
+
+Step 1: Visit 1. Queue: [1]
+Step 2: Dequeue 1. Mark visited. Enqueue neighbors 2,3.
+        Queue: [2,3]   Visited: {1}   Output: 1
+
+Step 3: Dequeue 2. Enqueue unvisited neighbors 4,5.
+        Queue: [3,4,5] Visited: {1,2} Output: 1 2
+
+Step 4: Dequeue 3. Enqueue unvisited neighbor 6.
+        Queue: [4,5,6] Visited: {1,2,3} Output: 1 2 3
+
+Step 5: Dequeue 4. No unvisited neighbors.
+        Queue: [5,6]   Output: 1 2 3 4
+
+Step 6: Dequeue 5. No unvisited neighbors.
+        Queue: [6]     Output: 1 2 3 4 5
+
+Step 7: Dequeue 6. No unvisited neighbors.
+        Queue: []      Output: 1 2 3 4 5 6
+
+BFS Order: 1 → 2 → 3 → 4 → 5 → 6</pre>
+          <p><strong>Time Complexity:</strong> O(V + E) &nbsp;&nbsp; <strong>Space Complexity:</strong> O(V)</p>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">Graph = V+E. Adjacency matrix: O(V²) space, O(1) lookup. Adjacency list: O(V+E) space. BFS uses a QUEUE and visits level by level.</div></div>
+
+    </div></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <div class="q-num">4</div>
+      <div class="q-text">Write algorithms for DFS and BFS. Trace both algorithms for the given graph.</div>
+      <div class="q-toggle">▾</div>
+    </div>
+    <div class="q-body"><div class="q-body-inner">
+
+      <div class="concept-box"><strong>Note:</strong> The graph from the question figure is assumed to be: Vertices {0,1,2,3,4}, Edges: 0-1, 0-2, 1-3, 1-4, 2-4. Starting from vertex 0.</div>
+
+      <div class="step-group">
+        <div class="step-label">BFS Algorithm (Complete)</div>
+        <div class="step-body">
+<pre class="math">Algorithm BFS(Graph G, start vertex s):
+1. Create visited[] array, initialize all to false
+2. Create empty Queue Q
+3. Mark visited[s] = true
+4. Enqueue s into Q
+5. While Q is not empty:
+    a. v = Dequeue from Q
+    b. Process / Print v
+    c. For each neighbor u of v:
+       i.  If visited[u] == false:
+           - visited[u] = true
+           - Enqueue u into Q
+6. End</pre>
+          <p><strong>BFS Trace (Graph: 0-1, 0-2, 1-3, 1-4, 2-4, start=0):</strong></p>
+<pre class="math">Queue State        Visited         Output
+Enqueue 0          {0}
+Dequeue 0 →        {0,1,2}         0
+  enqueue 1,2
+Dequeue 1 →        {0,1,2,3,4}     0 1
+  enqueue 3,4
+Dequeue 2 →        {0,1,2,3,4}     0 1 2
+  4 already visited
+Dequeue 3 →        same            0 1 2 3
+Dequeue 4 →        same            0 1 2 3 4
+
+BFS Result: 0 1 2 3 4</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">DFS Algorithm (Complete)</div>
+        <div class="step-body">
+<pre class="math">Algorithm DFS(Graph G, start vertex s):
+1. Create visited[] array, initialize all to false
+2. Call DFS_Visit(s)
+
+DFS_Visit(v):
+1. Mark visited[v] = true
+2. Process / Print v
+3. For each neighbor u of v:
+    a. If visited[u] == false:
+       - DFS_Visit(u)   ← Recursive call</pre>
+          <p><strong>Iterative DFS using STACK:</strong></p>
+<pre class="math">Algorithm DFS_Iterative(G, s):
+1. Create visited[] array
+2. Create Stack S
+3. Push s onto S
+4. While S is not empty:
+    a. v = Pop from S
+    b. If visited[v] == false:
+       - visited[v] = true
+       - Print v
+       - For each neighbor u of v (in reverse order):
+         Push u onto S
+5. End</pre>
+          <p><strong>DFS Trace (same graph, start=0):</strong></p>
+<pre class="math">Stack State        Visited         Output
+Push 0             {}
+Pop 0 → visit      {0}             0
+  Push 2,1 (neighbors)
+Pop 1 → visit      {0,1}           0 1
+  Push 4,3
+Pop 3 → visit      {0,1,3}         0 1 3
+  No unvisited neighbors
+Pop 4 → visit      {0,1,3,4}       0 1 3 4
+  Neighbor 2 pushed
+Pop 2 → visit      {0,1,2,3,4}     0 1 3 4 2
+
+DFS Result: 0 1 3 4 2</pre>
+        </div>
+      </div>
+
+      <div class="step-group">
+        <div class="step-label">Comparison: BFS vs DFS</div>
+        <div class="step-body">
+<pre class="math">Feature         BFS                      DFS
+Data Structure  Queue (FIFO)             Stack (LIFO) / Recursion
+Traversal       Level by level           One path as deep as possible
+Time            O(V + E)                 O(V + E)
+Space           O(V)                     O(V) (recursion depth)
+Use Case        Shortest path, web crawl Topological sort, cycle detection
+Completeness    Complete                 May not find shortest path</pre>
+        </div>
+      </div>
+
+      <div class="ans-box"><div class="ans-icon">✅</div>
+      <div class="ans-text">BFS (Queue) gives level-order: 0→1→2→3→4. DFS (Stack/Recursion) goes deep first: 0→1→3→4→2. Both have O(V+E) time complexity.</div></div>
+
+    </div></div>
+  </div>
+
+</div><!-- end u5 -->
+
+</div><!-- container -->
+
+<script>
+function toggle(card) { card.classList.toggle('open'); }
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function expandAll(id) { document.querySelectorAll('#' + id + ' .q-card').forEach(c => c.classList.add('open')); }
+function collapseAll(id) { document.querySelectorAll('#' + id + ' .q-card').forEach(c => c.classList.remove('open')); }
+</script>
+
+</body>
+</html>
