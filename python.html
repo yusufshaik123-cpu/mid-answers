@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Solutions – Unit III, IV &amp; V | Aditya University</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="badge">Aditya University · AY 2025-26 SEM-II</div>
+  <h1>Programming with Python</h1>
+  <p>Course Code: 2501IT42 &nbsp;·&nbsp; Elaborated Step-by-Step Solutions — Unit III, IV &amp; V</p>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('u3')">🐍 Unit III – Functions &amp; Modules</button>
+  <button class="tab-btn" onclick="switchTab('u4')">🏛️ Unit IV – OOP &amp; Files</button>
+  <button class="tab-btn" onclick="switchTab('u5')">⚠️ Unit V – Exceptions &amp; GUI</button>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════ UNIT III ═══════════════════════════ -->
+<div id="u3" class="tab-content active">
+<div class="unit-title">Unit III: Functions &amp; Modules</div>
+<div class="ctrl-bar">
+  <button class="ctrl-btn" onclick="expandAll('u3')">▼ Expand All</button>
+  <button class="ctrl-btn" onclick="collapseAll('u3')">▲ Collapse All</button>
+</div>
+
+<!-- Q1 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">1</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Define function. Explain function creation and function calling in Python with an example program.
+  <br><span class="part-label">b)</span> Explain about local and global variables with suitable examples.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Function Creation and Calling [4M]</div>
+<div class="concept-box"><strong>Definition:</strong> A <strong>function</strong> is a named, reusable block of code that performs a specific task. It is defined once and can be called multiple times.</div>
+
+<div class="step-group">
+<div class="step-label">Syntax</div>
+<div class="step-body">
+<code class="math">def function_name(parameters):
+    """docstring (optional)"""
+    # body of the function
+    return value   # optional</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Key Terms</div>
+<div class="step-body">
+<p><strong>def</strong> – keyword used to define a function.</p>
+<p><strong>function_name</strong> – identifier for the function.</p>
+<p><strong>parameters</strong> – inputs the function accepts (optional).</p>
+<p><strong>return</strong> – sends back a value to the caller (optional).</p>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example Program</div>
+<div class="step-body">
+<code class="math"># Function Definition
+def greet(name):
+    """Greets a person by name"""
+    message = "Hello, " + name + "!"
+    return message
+
+# Function Calling
+result = greet("Aditya")
+print(result)       # Output: Hello, Aditya!
+
+# Another call
+print(greet("John"))  # Output: Hello, John!</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example: Function for Addition</div>
+<div class="step-body">
+<code class="math">def add(a, b):
+    return a + b
+
+# Calling the function
+print(add(10, 20))   # Output: 30
+print(add(5, 7))     # Output: 12</code>
+</div></div>
+
+<div class="note">📌 A function must be <strong>defined before it is called</strong>. Python executes the function body only when it is called.</div>
+
+<div class="sub-question">Part (b): Local and Global Variables [4M]</div>
+<div class="concept-box"><strong>Local Variable:</strong> Declared <em>inside</em> a function; accessible only within that function.<br>
+<strong>Global Variable:</strong> Declared <em>outside</em> all functions; accessible throughout the program.</div>
+
+<div class="step-group">
+<div class="step-label">Local Variable Example</div>
+<div class="step-body">
+<code class="math">def demo():
+    x = 10       # local variable
+    print("Inside function, x =", x)
+
+demo()
+# print(x)     # ERROR: x is not defined outside the function</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Global Variable Example</div>
+<div class="step-body">
+<code class="math">g = 100       # global variable
+
+def show():
+    print("Inside function, g =", g)   # Can access global
+
+show()
+print("Outside function, g =", g)     # Can access globally
+
+# Output:
+# Inside function, g = 100
+# Outside function, g = 100</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Using <code>global</code> keyword to modify a global variable inside a function</div>
+<div class="step-body">
+<code class="math">count = 0     # global variable
+
+def increment():
+    global count    # declare we are using the global count
+    count += 1
+
+increment()
+increment()
+print(count)   # Output: 2</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Comparison Table</div>
+<div class="step-body">
+<p><strong>Local Variable:</strong> Defined inside a function | Scope: only within function | Destroyed after function ends.</p>
+<p><strong>Global Variable:</strong> Defined outside functions | Scope: entire program | Persists throughout program execution.</p>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Local variables exist only inside their function. Global variables are accessible everywhere. Use the <code>global</code> keyword to modify a global variable inside a function.</div></div>
+
+</div></div></div>
+
+<!-- Q2 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">2</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Explain different function arguments with suitable examples.
+  <br><span class="part-label">b)</span> Write a Python function that takes two lists and returns True if they have at least one common member.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Types of Function Arguments [4M]</div>
+<div class="concept-box">Python supports <strong>4 types</strong> of function arguments: Positional, Default, Keyword, and Variable-length.</div>
+
+<div class="step-group">
+<div class="step-label">1. Positional Arguments</div>
+<div class="step-body">
+<p>Values passed in the same order as parameters are defined.</p>
+<code class="math">def subtract(a, b):
+    return a - b
+
+print(subtract(10, 3))   # Output: 7
+# a=10, b=3 — order matters</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">2. Default Arguments</div>
+<div class="step-body">
+<p>Parameters can have default values; used if no argument is passed.</p>
+<code class="math">def greet(name, msg="Good Morning"):
+    print(name, "–", msg)
+
+greet("Alice")               # Output: Alice – Good Morning
+greet("Bob", "Good Night")   # Output: Bob – Good Night</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">3. Keyword Arguments</div>
+<div class="step-body">
+<p>Arguments passed by explicitly naming the parameter — order does not matter.</p>
+<code class="math">def info(name, age):
+    print("Name:", name, "Age:", age)
+
+info(age=20, name="Ram")   # Output: Name: Ram Age: 20</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">4. Variable-length Arguments (*args and **kwargs)</div>
+<div class="step-body">
+<p><strong>*args</strong> – accepts any number of positional arguments (stored as a tuple).</p>
+<code class="math">def add_all(*nums):
+    return sum(nums)
+
+print(add_all(1, 2, 3, 4))   # Output: 10</code>
+<p><strong>**kwargs</strong> – accepts any number of keyword arguments (stored as a dict).</p>
+<code class="math">def profile(**details):
+    for key, val in details.items():
+        print(key, ":", val)
+
+profile(name="Yusuf", branch="CSE", year=2)
+# Output:
+# name : Yusuf
+# branch : CSE
+# year : 2</code>
+</div></div>
+
+<div class="sub-question">Part (b): Common Member Check in Two Lists [4M]</div>
+<div class="step-group">
+<div class="step-label">Program</div>
+<div class="step-body">
+<code class="math">def has_common_member(list1, list2):
+    """Returns True if list1 and list2 share at least one common element"""
+    for item in list1:
+        if item in list2:
+            return True
+    return False
+
+# Test Cases
+L1 = [1, 2, 3, 4]
+L2 = [5, 6, 3, 8]
+L3 = [10, 20, 30]
+
+print(has_common_member(L1, L2))   # Output: True  (3 is common)
+print(has_common_member(L1, L3))   # Output: False (no common element)</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Alternative — Using set intersection</div>
+<div class="step-body">
+<code class="math">def has_common_member(list1, list2):
+    return bool(set(list1) & set(list2))
+
+print(has_common_member([1,2,3], [4,5,3]))   # True
+print(has_common_member([1,2,3], [4,5,6]))   # False</code>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Python supports 4 argument types: Positional, Default, Keyword, and Variable-length (*args/**kwargs). The common-member function iterates through list1 checking each element against list2.</div></div>
+
+</div></div></div>
+
+<!-- Q3 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">3</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Explain anonymous functions with examples.
+  <br><span class="part-label">b)</span> Explain following keywords with suitable examples: i) import &nbsp; ii) from &nbsp; iii) as
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Anonymous Functions (Lambda) [4M]</div>
+<div class="concept-box"><strong>Anonymous functions</strong> are functions defined without a name using the <strong>lambda</strong> keyword. They are typically small, single-expression functions used inline.</div>
+
+<div class="step-group">
+<div class="step-label">Syntax</div>
+<div class="step-body">
+<code class="math">lambda arguments : expression</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example 1 – Basic lambda</div>
+<div class="step-body">
+<code class="math">square = lambda x: x * x
+print(square(5))    # Output: 25
+print(square(9))    # Output: 81</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example 2 – Multiple arguments</div>
+<div class="step-body">
+<code class="math">add = lambda a, b: a + b
+print(add(3, 7))    # Output: 10</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example 3 – Lambda with map()</div>
+<div class="step-body">
+<code class="math">nums = [1, 2, 3, 4, 5]
+cubes = list(map(lambda x: x**3, nums))
+print(cubes)   # Output: [1, 8, 27, 64, 125]</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example 4 – Lambda with filter()</div>
+<div class="step-body">
+<code class="math">nums = [1, 2, 3, 4, 5, 6]
+evens = list(filter(lambda x: x % 2 == 0, nums))
+print(evens)   # Output: [2, 4, 6]</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Lambda vs Regular Function Comparison</div>
+<div class="step-body">
+<code class="math"># Regular function
+def multiply(x, y):
+    return x * y
+
+# Equivalent lambda
+multiply = lambda x, y: x * y
+
+print(multiply(4, 5))   # Output: 20</code>
+</div></div>
+
+<div class="note">📌 Lambda functions are limited to a <strong>single expression</strong>. For complex logic, use a regular <code>def</code> function.</div>
+
+<div class="sub-question">Part (b): import, from, as Keywords [4M]</div>
+
+<div class="step-group">
+<div class="step-label">i) import — importing an entire module</div>
+<div class="step-body">
+<code class="math">import math
+
+print(math.sqrt(25))    # Output: 5.0
+print(math.pi)          # Output: 3.141592653589793
+print(math.factorial(5))# Output: 120</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">ii) from — importing specific items from a module</div>
+<div class="step-body">
+<code class="math">from math import sqrt, pi
+
+print(sqrt(49))   # Output: 7.0
+print(pi)         # Output: 3.141592653589793
+# No need to write math.sqrt — just sqrt</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">iii) as — giving an alias to a module or function</div>
+<div class="step-body">
+<code class="math">import math as m
+
+print(m.sqrt(16))   # Output: 4.0
+
+# Alias for a specific function
+from math import factorial as fact
+print(fact(6))       # Output: 720</code>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Lambda = anonymous single-expression function. <code>import</code> loads a whole module; <code>from</code> imports specific items; <code>as</code> creates an alias for easier usage.</div></div>
+
+</div></div></div>
+
+<!-- Q4 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">4</div>
+<div class="q-text">
+  <span class="part-label">a)</span> List and explain standard modules in Python.
+  <br><span class="part-label">b)</span> Differentiate top-down and bottom-up approaches with examples.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Standard Modules in Python [4M]</div>
+<div class="concept-box">Python's <strong>Standard Library</strong> is a collection of built-in modules that provide ready-to-use functionality without any installation.</div>
+
+<div class="step-group">
+<div class="step-label">1. math module — Mathematical operations</div>
+<div class="step-body">
+<code class="math">import math
+print(math.sqrt(64))        # 8.0
+print(math.ceil(4.2))       # 5
+print(math.floor(4.9))      # 4
+print(math.pow(2, 10))      # 1024.0
+print(math.gcd(12, 8))      # 4</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">2. random module — Random number generation</div>
+<div class="step-body">
+<code class="math">import random
+print(random.random())         # float between 0 and 1
+print(random.randint(1, 100))  # random integer between 1 and 100
+print(random.choice([10,20,30,40]))  # random element from list</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">3. os module — Operating system interface</div>
+<div class="step-body">
+<code class="math">import os
+print(os.getcwd())        # current working directory
+print(os.listdir('.'))    # list files in current directory
+os.mkdir("test_folder")   # create a new directory</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">4. sys module — System-specific parameters</div>
+<div class="step-body">
+<code class="math">import sys
+print(sys.version)         # Python version
+print(sys.argv)            # command line arguments
+sys.exit()                 # exit the program</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">5. datetime module — Date and time handling</div>
+<div class="step-body">
+<code class="math">import datetime
+today = datetime.date.today()
+print(today)               # Output: 2025-xx-xx (current date)
+now = datetime.datetime.now()
+print(now)                 # current date and time</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">6. string module</div>
+<div class="step-body">
+<code class="math">import string
+print(string.ascii_lowercase)   # abcdefghijklmnopqrstuvwxyz
+print(string.digits)            # 0123456789</code>
+</div></div>
+
+<div class="sub-question">Part (b): Top-Down vs Bottom-Up Approach [4M]</div>
+
+<div class="step-group">
+<div class="step-label">Top-Down Approach</div>
+<div class="step-body">
+<p>The problem is broken into smaller sub-problems starting from the main function. The main logic is written first and individual functions are added later.</p>
+<code class="math"># Top-Down: Main logic first, details filled in
+def calculate_grade(marks):
+    percentage = compute_percentage(marks)     # called but defined later
+    grade = assign_grade(percentage)
+    print("Grade:", grade)
+
+def compute_percentage(marks):
+    return sum(marks) / len(marks)
+
+def assign_grade(pct):
+    if pct >= 90: return 'A'
+    elif pct >= 75: return 'B'
+    else: return 'C'
+
+calculate_grade([85, 90, 78, 92])</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Bottom-Up Approach</div>
+<div class="step-body">
+<p>Smaller utility functions are built first and then combined to form the full solution.</p>
+<code class="math"># Bottom-Up: Build utilities first, integrate later
+def compute_percentage(marks):
+    return sum(marks) / len(marks)
+
+def assign_grade(pct):
+    if pct >= 90: return 'A'
+    elif pct >= 75: return 'B'
+    else: return 'C'
+
+# Integrate after all parts are ready
+def calculate_grade(marks):
+    pct = compute_percentage(marks)
+    return assign_grade(pct)
+
+print(calculate_grade([85, 90, 78, 92]))   # Output: B</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Comparison</div>
+<div class="step-body">
+<p><strong>Top-Down:</strong> Design from high-level to low-level | Good for large systems | Uses stubs for missing parts.</p>
+<p><strong>Bottom-Up:</strong> Build low-level first, combine later | Good for reuse | Each module is independently testable.</p>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Key standard modules: math, random, os, sys, datetime, string. Top-down starts with the big picture; bottom-up builds small pieces first then assembles them.</div></div>
+
+</div></div></div>
+
+<!-- Q5 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">5</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Explain the advantage of packages. Explain the procedure to create a package and use the same.
+  <br><span class="part-label">b)</span> Define Recursion. Explain Recursive Functions with suitable examples.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Packages in Python [4M]</div>
+<div class="concept-box"><strong>Package:</strong> A directory containing multiple Python modules (files) along with a special <code>__init__.py</code> file that marks it as a package.</div>
+
+<div class="step-group">
+<div class="step-label">Advantages of Packages</div>
+<div class="step-body">
+<p>1. <strong>Organisation:</strong> Groups related modules together in one directory.</p>
+<p>2. <strong>Namespace management:</strong> Avoids name conflicts between modules.</p>
+<p>3. <strong>Reusability:</strong> Modules inside a package can be reused across projects.</p>
+<p>4. <strong>Maintainability:</strong> Large projects become easier to manage.</p>
+<p>5. <strong>Distribution:</strong> Packages can be easily shared or published via pip.</p>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Creating a Package – Directory Structure</div>
+<div class="step-body">
+<code class="math">mypackage/
+│
+├── __init__.py       ← marks this folder as a package
+├── arithmetic.py     ← module 1
+└── greet.py          ← module 2</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">arithmetic.py</div>
+<div class="step-body">
+<code class="math">def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">greet.py</div>
+<div class="step-body">
+<code class="math">def say_hello(name):
+    print("Hello,", name)</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">__init__.py (can be empty or have imports)</div>
+<div class="step-body">
+<code class="math"># __init__.py
+# Can be empty or import specific items
+from . import arithmetic
+from . import greet</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Using the Package in main.py</div>
+<div class="step-body">
+<code class="math">from mypackage import arithmetic
+from mypackage.greet import say_hello
+
+print(arithmetic.add(5, 3))       # Output: 8
+print(arithmetic.multiply(4, 6))  # Output: 24
+say_hello("Aditya")               # Output: Hello, Aditya</code>
+</div></div>
+
+<div class="sub-question">Part (b): Recursion [4M]</div>
+<div class="concept-box"><strong>Recursion:</strong> A technique where a function calls <em>itself</em> to solve a problem. Every recursive function must have a <strong>base case</strong> (termination condition) to stop infinite calls.</div>
+
+<div class="step-group">
+<div class="step-label">Example 1 – Factorial</div>
+<div class="step-body">
+<code class="math">def factorial(n):
+    if n == 0 or n == 1:   # base case
+        return 1
+    return n * factorial(n - 1)   # recursive call
+
+print(factorial(5))   # 5*4*3*2*1 = 120
+print(factorial(0))   # 1</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example 2 – Fibonacci</div>
+<div class="step-body">
+<code class="math">def fibonacci(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    return fibonacci(n-1) + fibonacci(n-2)
+
+for i in range(7):
+    print(fibonacci(i), end=" ")
+# Output: 0 1 1 2 3 5 8</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example 3 – Sum of digits</div>
+<div class="step-body">
+<code class="math">def sum_digits(n):
+    if n == 0:
+        return 0
+    return n % 10 + sum_digits(n // 10)
+
+print(sum_digits(1234))   # Output: 10</code>
+</div></div>
+
+<div class="note">📌 Each recursive call uses stack memory. Deep recursion may cause <strong>RecursionError</strong>. Python default limit is 1000 calls.</div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Packages organise modules into directories with <code>__init__.py</code>. Recursion = a function calling itself; always needs a base case to terminate.</div></div>
+
+</div></div></div>
+
+<!-- Q6 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">6</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Explain different function categories with examples.
+  <br><span class="part-label">b)</span> Explain top-down and bottom-up approaches.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Function Categories [4M]</div>
+<div class="concept-box">Based on arguments and return values, Python functions are classified into <strong>4 categories</strong>.</div>
+
+<div class="step-group">
+<div class="step-label">Category 1 – No arguments, No return value</div>
+<div class="step-body">
+<code class="math">def display():
+    print("Welcome to Python!")
+
+display()   # Output: Welcome to Python!</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Category 2 – With arguments, No return value</div>
+<div class="step-body">
+<code class="math">def greet(name):
+    print("Hello,", name)
+
+greet("Alice")   # Output: Hello, Alice</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Category 3 – No arguments, With return value</div>
+<div class="step-body">
+<code class="math">def get_pi():
+    return 3.14159
+
+val = get_pi()
+print("Pi =", val)   # Output: Pi = 3.14159</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Category 4 – With arguments, With return value</div>
+<div class="step-body">
+<code class="math">def add(a, b):
+    return a + b
+
+result = add(10, 20)
+print("Sum =", result)   # Output: Sum = 30</code>
+</div></div>
+
+<div class="sub-question">Part (b): Top-Down and Bottom-Up Approaches [4M]</div>
+<div class="concept-box">These are two software design strategies for decomposing a complex problem into manageable functions.</div>
+
+<div class="step-group">
+<div class="step-label">Top-Down Approach – Overview</div>
+<div class="step-body">
+<p>Start from the <strong>main problem</strong> and progressively break it into smaller sub-functions.</p>
+<p>The main function is written first; sub-functions are stubs initially.</p>
+<code class="math">def main():
+    data = get_input()
+    result = process(data)
+    display(result)
+
+def get_input():
+    return [int(x) for x in input("Enter numbers: ").split()]
+
+def process(data):
+    return sum(data)
+
+def display(result):
+    print("Sum:", result)
+
+main()</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Bottom-Up Approach – Overview</div>
+<div class="step-body">
+<p>Start from <strong>smallest utility functions</strong> and integrate them to build the complete system.</p>
+<code class="math">def is_prime(n):
+    if n < 2: return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0: return False
+    return True
+
+def get_primes(limit):
+    return [x for x in range(2, limit+1) if is_prime(x)]
+
+# Integrate
+print(get_primes(30))
+# Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]</code>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">4 function categories based on argument/return presence. Top-down designs from high-level down; bottom-up builds atomic functions first then integrates.</div></div>
+
+</div></div></div>
+
+</div><!-- end u3 -->
+
+
+<!-- ═══════════════════════════ UNIT IV ═══════════════════════════ -->
+<div id="u4" class="tab-content">
+<div class="unit-title">Unit IV: OOP &amp; File Handling</div>
+<div class="ctrl-bar">
+  <button class="ctrl-btn" onclick="expandAll('u4')">▼ Expand All</button>
+  <button class="ctrl-btn" onclick="collapseAll('u4')">▲ Collapse All</button>
+</div>
+
+<!-- Q1 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">1</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Define Inheritance and explain types of Inheritance with examples.
+  <br><span class="part-label">b)</span> Demonstrate Polymorphism using an example Python program.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Inheritance [4M]</div>
+<div class="concept-box"><strong>Inheritance:</strong> A mechanism where a <strong>child (derived) class</strong> acquires properties and methods from a <strong>parent (base) class</strong>. It promotes code reuse and represents an IS-A relationship.</div>
+
+<div class="step-group">
+<div class="step-label">Syntax</div>
+<div class="step-body">
+<code class="math">class Parent:
+    # parent members
+    pass
+
+class Child(Parent):
+    # inherits from Parent
+    pass</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">1. Single Inheritance – One child, one parent</div>
+<div class="step-body">
+<code class="math">class Animal:
+    def speak(self):
+        print("Animal speaks")
+
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+
+d = Dog()
+d.speak()   # Output: Animal speaks
+d.bark()    # Output: Dog barks</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">2. Multiple Inheritance – One child, multiple parents</div>
+<div class="step-body">
+<code class="math">class Father:
+    def talent(self):
+        print("Father: Singing")
+
+class Mother:
+    def skill(self):
+        print("Mother: Cooking")
+
+class Child(Father, Mother):
+    pass
+
+c = Child()
+c.talent()   # Father: Singing
+c.skill()    # Mother: Cooking</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">3. Multilevel Inheritance – Chain of inheritance</div>
+<div class="step-body">
+<code class="math">class A:
+    def method_a(self):
+        print("Class A")
+
+class B(A):
+    def method_b(self):
+        print("Class B")
+
+class C(B):
+    def method_c(self):
+        print("Class C")
+
+obj = C()
+obj.method_a()   # Class A
+obj.method_b()   # Class B
+obj.method_c()   # Class C</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">4. Hierarchical Inheritance – Multiple children, one parent</div>
+<div class="step-body">
+<code class="math">class Vehicle:
+    def start(self):
+        print("Vehicle started")
+
+class Car(Vehicle):
+    def type(self):
+        print("Car")
+
+class Bike(Vehicle):
+    def type(self):
+        print("Bike")
+
+Car().start()    # Vehicle started
+Bike().start()   # Vehicle started</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">5. Hybrid Inheritance – Combination of above types</div>
+<div class="step-body">
+<code class="math">class A:
+    def show(self): print("A")
+
+class B(A):
+    def show(self): print("B")
+
+class C(A):
+    def show(self): print("C")
+
+class D(B, C):
+    pass
+
+d = D()
+d.show()    # Output: B  (MRO: D→B→C→A)</code>
+</div></div>
+
+<div class="sub-question">Part (b): Polymorphism [4M]</div>
+<div class="concept-box"><strong>Polymorphism:</strong> Same method name exhibiting different behaviours depending on the object calling it. "Many forms."</div>
+
+<div class="step-group">
+<div class="step-label">Example – Method Overriding (Runtime Polymorphism)</div>
+<div class="step-body">
+<code class="math">class Shape:
+    def area(self):
+        print("Shape area")
+
+class Circle(Shape):
+    def __init__(self, r):
+        self.r = r
+    def area(self):
+        print("Circle area:", 3.14 * self.r * self.r)
+
+class Rectangle(Shape):
+    def __init__(self, l, b):
+        self.l = l; self.b = b
+    def area(self):
+        print("Rectangle area:", self.l * self.b)
+
+# Polymorphic behaviour
+shapes = [Circle(5), Rectangle(4, 6)]
+for s in shapes:
+    s.area()
+# Output:
+# Circle area: 78.5
+# Rectangle area: 24</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example – Duck Typing Polymorphism</div>
+<div class="step-body">
+<code class="math">class Cat:
+    def sound(self): print("Meow")
+
+class Dog:
+    def sound(self): print("Woof")
+
+def make_sound(animal):
+    animal.sound()    # works for any object with sound()
+
+make_sound(Cat())   # Meow
+make_sound(Dog())   # Woof</code>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">5 inheritance types: Single, Multiple, Multilevel, Hierarchical, Hybrid. Polymorphism allows same method name to behave differently on different objects.</div></div>
+
+</div></div></div>
+
+<!-- Q2 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">2</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Demonstrate operator overloading with an example program.
+  <br><span class="part-label">b)</span> Demonstrate file operations with a suitable Python program.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Operator Overloading [4M]</div>
+<div class="concept-box"><strong>Operator Overloading:</strong> Defining custom behaviour for standard Python operators (like +, -, *, ==) when applied to user-defined class objects. Done via <strong>magic/dunder methods</strong>.</div>
+
+<div class="step-group">
+<div class="step-label">Common Magic Methods</div>
+<div class="step-body">
+<p><code>__add__</code> → + &nbsp;&nbsp; <code>__sub__</code> → - &nbsp;&nbsp; <code>__mul__</code> → * &nbsp;&nbsp; <code>__eq__</code> → == &nbsp;&nbsp; <code>__str__</code> → str()</p>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example – Overloading + for a Point class</div>
+<div class="step-body">
+<code class="math">class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Point(self.x + other.x, self.y + other.y)
+
+    def __sub__(self, other):
+        return Point(self.x - other.x, self.y - other.y)
+
+    def __mul__(self, scalar):
+        return Point(self.x * scalar, self.y * scalar)
+
+    def __str__(self):
+        return f"({self.x}, {self.y})"
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+
+p1 = Point(3, 4)
+p2 = Point(1, 2)
+
+print("p1 + p2 =", p1 + p2)   # (4, 6)
+print("p1 - p2 =", p1 - p2)   # (2, 2)
+print("p1 * 3  =", p1 * 3)    # (9, 12)
+print("p1 == p2:", p1 == p2)  # False</code>
+</div></div>
+
+<div class="sub-question">Part (b): File Operations [4M]</div>
+<div class="concept-box">Python provides built-in functions to <strong>create, write, read, and append</strong> files using the <code>open()</code> function.</div>
+
+<div class="step-group">
+<div class="step-label">Complete File Operations Program</div>
+<div class="step-body">
+<code class="math">### 1. Write to a file ###
+f = open("demo.txt", "w")
+f.write("Hello, Python!\n")
+f.write("File handling is easy.\n")
+f.close()
+
+### 2. Read entire file ###
+f = open("demo.txt", "r")
+content = f.read()
+print("Read:\n", content)
+f.close()
+
+### 3. Append to file ###
+f = open("demo.txt", "a")
+f.write("Appended line.\n")
+f.close()
+
+### 4. Read line by line ###
+f = open("demo.txt", "r")
+for line in f:
+    print(line, end="")
+f.close()
+
+### 5. Using 'with' (auto-closes file) ###
+with open("demo.txt", "r") as f:
+    data = f.read()
+    print(data)</code>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Operator overloading uses dunder methods (__add__, __sub__ etc.) to customise operator behaviour for objects. File ops: open → write/read/append → close (or use <code>with</code>).</div></div>
+
+</div></div></div>
+
+<!-- Q3 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">3</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Demonstrate the design with classes using a case study.
+  <br><span class="part-label">b)</span> Explain the functions write and writelines with examples.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Design with Classes – Case Study: Bank Account [4M]</div>
+<div class="concept-box">A class encapsulates data (attributes) and behaviour (methods) together. This case study models a simple bank account.</div>
+
+<div class="step-group">
+<div class="step-label">Case Study: BankAccount Class</div>
+<div class="step-body">
+<code class="math">class BankAccount:
+    def __init__(self, owner, balance=0):
+        self.owner   = owner
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited ₹{amount}. Balance: ₹{self.balance}")
+        else:
+            print("Invalid deposit amount.")
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Insufficient funds!")
+        elif amount <= 0:
+            print("Invalid amount.")
+        else:
+            self.balance -= amount
+            print(f"Withdrawn ₹{amount}. Balance: ₹{self.balance}")
+
+    def display(self):
+        print(f"Account Owner: {self.owner}")
+        print(f"Current Balance: ₹{self.balance}")
+
+# --- Usage ---
+acc = BankAccount("John", 5000)
+acc.display()
+acc.deposit(2000)
+acc.withdraw(1000)
+acc.withdraw(8000)   # Insufficient
+acc.display()
+
+# Output:
+# Account Owner: John
+# Current Balance: ₹5000
+# Deposited ₹2000. Balance: ₹7000
+# Withdrawn ₹1000. Balance: ₹6000
+# Insufficient funds!
+# Account Owner: John
+# Current Balance: ₹6000</code>
+</div></div>
+
+<div class="sub-question">Part (b): write() and writelines() [4M]</div>
+
+<div class="step-group">
+<div class="step-label">write() – Writes a single string to file</div>
+<div class="step-body">
+<code class="math">f = open("output.txt", "w")
+f.write("First line\n")
+f.write("Second line\n")
+f.write("Third line\n")
+f.close()
+
+# Reads back
+with open("output.txt", "r") as f:
+    print(f.read())
+# Output:
+# First line
+# Second line
+# Third line</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">writelines() – Writes a list of strings to file</div>
+<div class="step-body">
+<code class="math">lines = ["Line one\n", "Line two\n", "Line three\n"]
+
+f = open("output2.txt", "w")
+f.writelines(lines)
+f.close()
+
+with open("output2.txt", "r") as f:
+    print(f.read())
+# Output:
+# Line one
+# Line two
+# Line three</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Key Difference</div>
+<div class="step-body">
+<p><strong>write(str):</strong> Takes a single string; does NOT add newline automatically.</p>
+<p><strong>writelines(list):</strong> Takes an iterable of strings; writes them one after another; NO newlines added automatically.</p>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Class design encapsulates related data and functions. <code>write()</code> writes one string; <code>writelines()</code> writes a list of strings — neither adds newlines automatically.</div></div>
+
+</div></div></div>
+
+<!-- Q4 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">4</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Demonstrate the log file writing in Python program.
+  <br><span class="part-label">b)</span> Develop a program to read Config files in Python.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Log File Writing [4M]</div>
+<div class="concept-box">Python's built-in <strong>logging</strong> module provides a flexible framework for writing log messages at different severity levels to a file or console.</div>
+
+<div class="step-group">
+<div class="step-label">Log Levels (in order of severity)</div>
+<div class="step-body">
+<p>DEBUG &lt; INFO &lt; WARNING &lt; ERROR &lt; CRITICAL</p>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Program – Writing Logs to a File</div>
+<div class="step-body">
+<code class="math">import logging
+
+# Configure logging
+logging.basicConfig(
+    filename='app.log',         # log file name
+    level=logging.DEBUG,        # minimum level to log
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+# Writing different levels of log messages
+logging.debug("This is a DEBUG message")
+logging.info("Server started successfully")
+logging.warning("Low disk space warning")
+logging.error("File not found error occurred")
+logging.critical("Critical failure! System shutting down")
+
+print("Log file 'app.log' created.")</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Contents of app.log (sample output)</div>
+<div class="step-body">
+<code class="math">2025-01-15 10:30:00,123 - DEBUG   - This is a DEBUG message
+2025-01-15 10:30:00,124 - INFO    - Server started successfully
+2025-01-15 10:30:00,125 - WARNING - Low disk space warning
+2025-01-15 10:30:00,126 - ERROR   - File not found error occurred
+2025-01-15 10:30:00,127 - CRITICAL- Critical failure! System shutting down</code>
+</div></div>
+
+<div class="sub-question">Part (b): Reading Config Files [4M]</div>
+<div class="concept-box">Python's <strong>configparser</strong> module reads <code>.ini</code> style configuration files containing key-value pairs organised in sections.</div>
+
+<div class="step-group">
+<div class="step-label">config.ini file</div>
+<div class="step-body">
+<code class="math">[Database]
+host = localhost
+port = 3306
+user = admin
+password = secret123
+
+[App]
+debug = True
+version = 2.5</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Python Program to Read config.ini</div>
+<div class="step-body">
+<code class="math">import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# Read Database section
+db_host = config['Database']['host']
+db_port = config['Database']['port']
+db_user = config['Database']['user']
+
+print("Database Host:", db_host)
+print("Database Port:", db_port)
+print("Database User:", db_user)
+
+# Read App section
+debug  = config['App']['debug']
+ver    = config['App']['version']
+print("Debug Mode:", debug)
+print("App Version:", ver)
+
+# List all sections
+print("Sections:", config.sections())
+
+# Output:
+# Database Host: localhost
+# Database Port: 3306
+# Database User: admin
+# Debug Mode: True
+# App Version: 2.5
+# Sections: ['Database', 'App']</code>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text"><code>logging</code> module writes timestamped logs at 5 severity levels to a file. <code>configparser</code> reads <code>.ini</code> config files with sections and key-value pairs.</div></div>
+
+</div></div></div>
+
+<!-- Q5 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">5</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Demonstrate read(), readline(), and readlines() with examples.
+  <br><span class="part-label">b)</span> Describe self, Constructor, class variable, and instance variable with an example.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): read(), readline(), readlines() [4M]</div>
+<div class="concept-box">Assume <strong>sample.txt</strong> contains:<br>Line 1: Hello<br>Line 2: World<br>Line 3: Python</div>
+
+<div class="step-group">
+<div class="step-label">read() – Reads the entire file as one string</div>
+<div class="step-body">
+<code class="math">with open("sample.txt", "r") as f:
+    content = f.read()
+    print(content)
+# Output:
+# Hello
+# World
+# Python</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">read(n) – Reads first n characters</div>
+<div class="step-body">
+<code class="math">with open("sample.txt", "r") as f:
+    part = f.read(5)
+    print(part)     # Output: Hello</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">readline() – Reads one line at a time</div>
+<div class="step-body">
+<code class="math">with open("sample.txt", "r") as f:
+    print(f.readline())   # Hello
+    print(f.readline())   # World
+    print(f.readline())   # Python</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">readlines() – Reads all lines into a list</div>
+<div class="step-body">
+<code class="math">with open("sample.txt", "r") as f:
+    lines = f.readlines()
+    print(lines)
+# Output: ['Hello\n', 'World\n', 'Python']
+
+# Iterate through lines
+for line in lines:
+    print(line.strip())</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Summary Table</div>
+<div class="step-body">
+<p><strong>read():</strong> Returns entire file as one string.</p>
+<p><strong>readline():</strong> Returns one line per call (including newline).</p>
+<p><strong>readlines():</strong> Returns a list where each element is a line.</p>
+</div></div>
+
+<div class="sub-question">Part (b): self, Constructor, Class Variable, Instance Variable [4M]</div>
+
+<div class="step-group">
+<div class="step-label">Complete Example Demonstrating All Four</div>
+<div class="step-body">
+<code class="math">class Student:
+    # Class variable – shared by ALL instances
+    college = "Aditya University"
+    count   = 0
+
+    # Constructor – __init__ is the constructor
+    # 'self' refers to the current object being created
+    def __init__(self, name, marks):
+        # Instance variables – unique to each object
+        self.name  = name     # instance variable
+        self.marks = marks    # instance variable
+        Student.count += 1    # modify class variable
+
+    def display(self):
+        print(f"Name: {self.name}")
+        print(f"Marks: {self.marks}")
+        print(f"College: {Student.college}")
+
+# Creating objects
+s1 = Student("Alice", 90)
+s2 = Student("Bob", 75)
+
+s1.display()
+# Name: Alice
+# Marks: 90
+# College: Aditya University
+
+s2.display()
+# Name: Bob
+# Marks: 75
+# College: Aditya University
+
+print("Total students:", Student.count)   # 2</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Explanations</div>
+<div class="step-body">
+<p><strong>self:</strong> A reference to the current instance of the class; first parameter of every instance method; not a keyword — just a convention.</p>
+<p><strong>Constructor (__init__):</strong> Special method automatically called when an object is created; used to initialise instance variables.</p>
+<p><strong>Class Variable:</strong> Shared across all objects of the class; defined inside the class but outside any method.</p>
+<p><strong>Instance Variable:</strong> Unique to each object; defined inside <code>__init__</code> using <code>self.variable</code>.</p>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text"><code>read()</code> = whole file; <code>readline()</code> = one line; <code>readlines()</code> = list of lines. <code>self</code> = current object; Constructor initialises objects; class variables are shared; instance variables are per-object.</div></div>
+
+</div></div></div>
+
+<!-- Q6 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">6</div>
+<div class="q-text">
+  <span class="part-label">a)</span> List and explain object-oriented concepts.
+  <br><span class="part-label">b)</span> What are the different modes of opening a file in Python? Explain the Python open() built-in function.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): OOP Concepts [4M]</div>
+<div class="concept-box">Object-Oriented Programming (OOP) organises code around <strong>objects</strong> rather than functions. Python supports all major OOP principles.</div>
+
+<div class="step-group">
+<div class="step-label">1. Class and Object</div>
+<div class="step-body">
+<p><strong>Class:</strong> Blueprint / template for creating objects.</p>
+<p><strong>Object:</strong> An instance of a class.</p>
+<code class="math">class Car:
+    def __init__(self, brand):
+        self.brand = brand
+
+c1 = Car("Toyota")
+print(c1.brand)   # Toyota</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">2. Encapsulation</div>
+<div class="step-body">
+<p>Bundling data and methods together; hiding internal details using private variables (prefix <code>__</code>).</p>
+<code class="math">class Account:
+    def __init__(self, bal):
+        self.__balance = bal    # private
+    def get_balance(self):
+        return self.__balance
+
+a = Account(5000)
+print(a.get_balance())   # 5000</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">3. Inheritance</div>
+<div class="step-body">
+<p>Child class inherits properties and methods from parent class.</p>
+<code class="math">class Animal:
+    def eat(self): print("Eating")
+
+class Dog(Animal):
+    def bark(self): print("Woof")
+
+Dog().eat()    # Eating (inherited)</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">4. Polymorphism</div>
+<div class="step-body">
+<p>Same method name works differently for different classes.</p>
+<code class="math">class Bird:
+    def sound(self): print("Tweet")
+
+class Cow:
+    def sound(self): print("Moo")
+
+for animal in [Bird(), Cow()]:
+    animal.sound()</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">5. Abstraction</div>
+<div class="step-body">
+<p>Hiding implementation details, showing only essential features. Achieved via abstract classes (abc module).</p>
+<code class="math">from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Circle(Shape):
+    def area(self): return 3.14 * 5 * 5
+
+print(Circle().area())   # 78.5</code>
+</div></div>
+
+<div class="sub-question">Part (b): File Opening Modes &amp; open() [4M]</div>
+<div class="concept-box"><strong>open(filename, mode)</strong> is the built-in function to open files. The <strong>mode</strong> specifies the purpose.</div>
+
+<div class="step-group">
+<div class="step-label">File Modes</div>
+<div class="step-body">
+<p><strong>'r'</strong> – Read (default); file must exist; pointer at start.</p>
+<p><strong>'w'</strong> – Write; creates file if not exists; overwrites existing content.</p>
+<p><strong>'a'</strong> – Append; creates file if not exists; adds to end.</p>
+<p><strong>'x'</strong> – Exclusive creation; fails if file already exists.</p>
+<p><strong>'r+'</strong> – Read and write; file must exist.</p>
+<p><strong>'w+'</strong> – Write and read; truncates file.</p>
+<p><strong>'a+'</strong> – Append and read.</p>
+<p><strong>'b'</strong> – Binary mode (e.g., 'rb', 'wb' for images/PDFs).</p>
+<p><strong>'t'</strong> – Text mode (default).</p>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Examples</div>
+<div class="step-body">
+<code class="math"># Read mode
+f = open("test.txt", "r")
+print(f.read())
+f.close()
+
+# Write mode
+f = open("test.txt", "w")
+f.write("Hello World")
+f.close()
+
+# Append mode
+f = open("test.txt", "a")
+f.write("\nNew Line")
+f.close()
+
+# Binary read (e.g., image)
+f = open("image.png", "rb")
+data = f.read()
+f.close()
+
+# Best practice: using 'with'
+with open("test.txt", "r") as f:
+    content = f.read()
+    print(content)</code>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">5 OOP pillars: Class/Object, Encapsulation, Inheritance, Polymorphism, Abstraction. File modes: r, w, a, x, r+, w+, a+ — use <code>with open()</code> for safe automatic file closing.</div></div>
+
+</div></div></div>
+
+<!-- Q7 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">7</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Write a Python program to create a class 'student' with members {name, branch, grade}. Define appropriate member functions for reading and displaying the student information.
+  <br><span class="part-label">b)</span> Write Python code snippets to illustrate Method overriding and Method overloading concepts.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Student Class Program [4M]</div>
+
+<div class="step-group">
+<div class="step-label">Program</div>
+<div class="step-body">
+<code class="math">class Student:
+    def __init__(self):
+        self.name   = ""
+        self.branch = ""
+        self.grade  = ""
+
+    def read(self):
+        """Read student information from user"""
+        self.name   = input("Enter Name   : ")
+        self.branch = input("Enter Branch : ")
+        self.grade  = input("Enter Grade  : ")
+
+    def display(self):
+        """Display student information"""
+        print("-" * 30)
+        print(f"Name   : {self.name}")
+        print(f"Branch : {self.branch}")
+        print(f"Grade  : {self.grade}")
+        print("-" * 30)
+
+    def set_data(self, name, branch, grade):
+        """Set data directly (for testing)"""
+        self.name   = name
+        self.branch = branch
+        self.grade  = grade
+
+# --- Main program ---
+s1 = Student()
+s1.set_data("Alice", "CSE", "A")
+s1.display()
+
+s2 = Student()
+s2.set_data("Bob", "ECE", "B+")
+s2.display()
+
+# With input (uncomment to use interactively):
+# s3 = Student()
+# s3.read()
+# s3.display()
+
+# Output:
+# ------------------------------
+# Name   : Alice
+# Branch : CSE
+# Grade  : A
+# ------------------------------
+# Name   : Bob
+# Branch : ECE
+# Grade  : B+
+# ------------------------------</code>
+</div></div>
+
+<div class="sub-question">Part (b): Method Overriding and Method Overloading [4M]</div>
+
+<div class="step-group">
+<div class="step-label">Method Overriding – Child redefines parent's method</div>
+<div class="step-body">
+<code class="math">class Animal:
+    def speak(self):
+        print("Animal makes a sound")
+
+class Dog(Animal):
+    def speak(self):           # overrides parent method
+        print("Dog says: Woof!")
+
+class Cat(Animal):
+    def speak(self):           # overrides parent method
+        print("Cat says: Meow!")
+
+# Demo
+a = Animal()
+d = Dog()
+c = Cat()
+
+a.speak()   # Animal makes a sound
+d.speak()   # Dog says: Woof!
+c.speak()   # Cat says: Meow!
+
+# Using super() to also call parent
+class Bird(Animal):
+    def speak(self):
+        super().speak()             # calls Animal.speak()
+        print("Bird says: Tweet!")
+
+Bird().speak()
+# Animal makes a sound
+# Bird says: Tweet!</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Method Overloading – Simulated using default arguments</div>
+<div class="step-body">
+<code class="math"># Python does NOT support true overloading (no multiple same-named methods)
+# Achieved using default parameters or *args
+
+class Calculator:
+    def add(self, a, b=0, c=0):
+        return a + b + c
+
+calc = Calculator()
+print(calc.add(5))          # 5     (1 argument)
+print(calc.add(5, 10))      # 15    (2 arguments)
+print(calc.add(5, 10, 15))  # 30    (3 arguments)
+
+# Using *args for true variadic overloading
+class Calc2:
+    def add(self, *args):
+        return sum(args)
+
+c = Calc2()
+print(c.add(1))          # 1
+print(c.add(1, 2))       # 3
+print(c.add(1, 2, 3, 4)) # 10</code>
+</div></div>
+
+<div class="note">📌 Python does not support true method overloading (you cannot define two methods with the same name). The last definition wins. Use default arguments or *args to simulate it.</div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Student class encapsulates name/branch/grade with read and display methods. Method overriding = child redefines parent method. Method overloading = simulated via default args or *args in Python.</div></div>
+
+</div></div></div>
+
+</div><!-- end u4 -->
+
+
+<!-- ═══════════════════════════ UNIT V ═══════════════════════════ -->
+<div id="u5" class="tab-content">
+<div class="unit-title">Unit V: Exception Handling &amp; GUI</div>
+<div class="ctrl-bar">
+  <button class="ctrl-btn" onclick="expandAll('u5')">▼ Expand All</button>
+  <button class="ctrl-btn" onclick="collapseAll('u5')">▲ Collapse All</button>
+</div>
+
+<!-- Q1 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">1</div>
+<div class="q-text">
+  <span class="part-label">a)</span> List and explain any four built-in error types in Python.
+  <br><span class="part-label">b)</span> Compare terminal-based with GUI-based programs.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Built-in Error Types [4M]</div>
+<div class="concept-box">Python has a rich hierarchy of built-in exceptions. All exceptions inherit from the <strong>BaseException</strong> class.</div>
+
+<div class="step-group">
+<div class="step-label">1. SyntaxError – Invalid Python syntax</div>
+<div class="step-body">
+<code class="math">>>> print "Hello"
+SyntaxError: Missing parentheses in call to 'print'
+
+# Caused by: incorrect indentation, missing colons, typos in keywords</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">2. ZeroDivisionError – Division by zero</div>
+<div class="step-body">
+<code class="math">a = 10
+b = 0
+print(a / b)
+# ZeroDivisionError: division by zero</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">3. NameError – Using an undefined variable</div>
+<div class="step-body">
+<code class="math">print(salary)
+# NameError: name 'salary' is not defined</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">4. TypeError – Wrong data type used in operation</div>
+<div class="step-body">
+<code class="math">result = "10" + 5
+# TypeError: can only concatenate str (not "int") to str
+
+len(100)
+# TypeError: object of type 'int' has no len()</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">5. IndexError – List index out of range</div>
+<div class="step-body">
+<code class="math">lst = [1, 2, 3]
+print(lst[10])
+# IndexError: list index out of range</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">6. KeyError – Key not found in dictionary</div>
+<div class="step-body">
+<code class="math">d = {"name": "Alice"}
+print(d["age"])
+# KeyError: 'age'</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">7. ValueError – Correct type but invalid value</div>
+<div class="step-body">
+<code class="math">int("abc")
+# ValueError: invalid literal for int() with base 10: 'abc'</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">8. FileNotFoundError – File doesn't exist</div>
+<div class="step-body">
+<code class="math">open("missing.txt", "r")
+# FileNotFoundError: [Errno 2] No such file or directory: 'missing.txt'</code>
+</div></div>
+
+<div class="sub-question">Part (b): Terminal-Based vs GUI-Based Programs [4M]</div>
+
+<div class="step-group">
+<div class="step-label">Terminal-Based Programs</div>
+<div class="step-body">
+<p>Interact with users through <strong>text input/output</strong> on the command line (console). No graphical elements.</p>
+<code class="math">name = input("Enter your name: ")
+print("Hello,", name)</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">GUI-Based Programs</div>
+<div class="step-body">
+<p>Interact through <strong>graphical widgets</strong> — buttons, text fields, windows, menus. Uses libraries like <strong>tkinter</strong>.</p>
+<code class="math">import tkinter as tk
+root = tk.Tk()
+root.title("Hello GUI")
+label = tk.Label(root, text="Hello, World!")
+label.pack()
+root.mainloop()</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Comparison Table</div>
+<div class="step-body">
+<p><strong>Interface:</strong> Terminal = text only | GUI = graphical windows, buttons, menus.</p>
+<p><strong>User-friendliness:</strong> Terminal = requires knowledge of commands | GUI = intuitive, beginner-friendly.</p>
+<p><strong>Complexity:</strong> Terminal = simpler to code | GUI = more code required.</p>
+<p><strong>Platform:</strong> Terminal = any OS with shell | GUI = needs display (not suitable for servers).</p>
+<p><strong>Use case:</strong> Terminal = scripts, automation, servers | GUI = desktop apps, forms, tools.</p>
+<p><strong>Examples:</strong> Terminal = Python IDLE shell, command scripts | GUI = MS Word, Calculator app, tkinter apps.</p>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Key error types: SyntaxError, ZeroDivisionError, NameError, TypeError, IndexError, ValueError. GUI programs use graphical widgets and are more user-friendly; terminal programs use text I/O and are simpler to write.</div></div>
+
+</div></div></div>
+
+<!-- Q2 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">2</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Define exceptions and how to handle exceptions in a Python program?
+  <br><span class="part-label">b)</span> Develop a Python program to handle division by zero exception.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Exceptions and Exception Handling [4M]</div>
+<div class="concept-box"><strong>Exception:</strong> An error that occurs <em>during program execution</em> (runtime) that disrupts the normal flow of the program. If unhandled, it terminates the program.<br>
+<strong>Exception Handling:</strong> The process of gracefully managing exceptions using <code>try</code>, <code>except</code>, <code>else</code>, and <code>finally</code> blocks.</div>
+
+<div class="step-group">
+<div class="step-label">Syntax</div>
+<div class="step-body">
+<code class="math">try:
+    # code that might raise an exception
+    risky_code()
+except ExceptionType:
+    # executed if ExceptionType occurs
+    handle_error()
+else:
+    # executed ONLY if no exception occurred
+    success_action()
+finally:
+    # ALWAYS executed, exception or not
+    cleanup()</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example – General Exception Handling</div>
+<div class="step-body">
+<code class="math">try:
+    num = int(input("Enter a number: "))
+    result = 100 / num
+    print("Result:", result)
+except ValueError:
+    print("Error: Please enter a valid integer.")
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero.")
+else:
+    print("No errors occurred!")
+finally:
+    print("Program execution complete.")</code>
+</div></div>
+
+<div class="sub-question">Part (b): Division by Zero Exception [4M]</div>
+
+<div class="step-group">
+<div class="step-label">Program</div>
+<div class="step-body">
+<code class="math">def safe_divide(a, b):
+    try:
+        result = a / b
+    except ZeroDivisionError:
+        print(f"Error: Cannot divide {a} by zero!")
+        return None
+    else:
+        print(f"{a} / {b} = {result}")
+        return result
+    finally:
+        print("Division operation attempted.")
+
+# Test Cases
+safe_divide(10, 2)
+print()
+safe_divide(10, 0)
+print()
+safe_divide(25, 5)
+
+# Output:
+# 10 / 2 = 5.0
+# Division operation attempted.
+#
+# Error: Cannot divide 10 by zero!
+# Division operation attempted.
+#
+# 25 / 5 = 5.0
+# Division operation attempted.</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Interactive Version</div>
+<div class="step-body">
+<code class="math">try:
+    numerator   = int(input("Enter numerator   : "))
+    denominator = int(input("Enter denominator : "))
+    result = numerator / denominator
+    print("Result =", result)
+except ZeroDivisionError:
+    print("Error: Division by zero is not allowed!")
+except ValueError:
+    print("Error: Please enter integers only.")
+finally:
+    print("Thank you!")</code>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Exceptions are runtime errors. Handle them with try-except-else-finally. ZeroDivisionError is raised when dividing by zero; catch it in an except block to prevent program crash.</div></div>
+
+</div></div></div>
+
+<!-- Q3 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">3</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Demonstrate GUI-based program coding with an example.
+  <br><span class="part-label">b)</span> How to create, raise and handle user-defined exceptions in Python? Illustrate with a Python program.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): GUI Programming with Tkinter [4M]</div>
+<div class="concept-box"><strong>tkinter</strong> is Python's standard built-in library for creating Graphical User Interface (GUI) applications. It provides widgets like Label, Button, Entry, Frame etc.</div>
+
+<div class="step-group">
+<div class="step-label">Key Tkinter Widgets</div>
+<div class="step-body">
+<p><strong>Tk()</strong> – Main window. &nbsp; <strong>Label</strong> – Display text. &nbsp; <strong>Button</strong> – Clickable button. &nbsp; <strong>Entry</strong> – Text input. &nbsp; <strong>mainloop()</strong> – Starts the event loop.</p>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example – Simple Calculator GUI</div>
+<div class="step-body">
+<code class="math">import tkinter as tk
+
+def calculate():
+    try:
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        result = a + b
+        label_result.config(text=f"Sum = {result}")
+    except ValueError:
+        label_result.config(text="Please enter valid numbers!")
+
+# Create main window
+root = tk.Tk()
+root.title("Simple Adder")
+root.geometry("300x200")
+
+# Widgets
+tk.Label(root, text="Number 1:").pack(pady=5)
+entry_a = tk.Entry(root)
+entry_a.pack()
+
+tk.Label(root, text="Number 2:").pack(pady=5)
+entry_b = tk.Entry(root)
+entry_b.pack()
+
+btn = tk.Button(root, text="Add", command=calculate)
+btn.pack(pady=10)
+
+label_result = tk.Label(root, text="Result will appear here")
+label_result.pack()
+
+# Start event loop
+root.mainloop()</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example – Hello World GUI (Minimal)</div>
+<div class="step-body">
+<code class="math">import tkinter as tk
+
+root = tk.Tk()
+root.title("My First GUI")
+
+label = tk.Label(root, text="Hello, World!", font=("Arial", 16))
+label.pack(padx=20, pady=20)
+
+btn = tk.Button(root, text="Click Me", command=lambda: label.config(text="Clicked!"))
+btn.pack(pady=10)
+
+root.mainloop()</code>
+</div></div>
+
+<div class="sub-question">Part (b): User-Defined Exceptions [4M]</div>
+<div class="concept-box"><strong>User-defined exceptions</strong> are custom exception classes created by inheriting from Python's built-in <code>Exception</code> class. They allow you to define application-specific error conditions.</div>
+
+<div class="step-group">
+<div class="step-label">Step 1 – Create custom exception class</div>
+<div class="step-body">
+<code class="math">class NegativeAgeError(Exception):
+    """Raised when age is negative"""
+    def __init__(self, age, message="Age cannot be negative"):
+        self.age     = age
+        self.message = message
+        super().__init__(self.message)
+
+class AgeExceedError(Exception):
+    """Raised when age is unrealistically high"""
+    def __init__(self, age):
+        self.age = age
+        super().__init__(f"Age {age} exceeds maximum limit of 150")</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Step 2 – Raise and handle the exception</div>
+<div class="step-body">
+<code class="math">def validate_age(age):
+    if age < 0:
+        raise NegativeAgeError(age)
+    elif age > 150:
+        raise AgeExceedError(age)
+    else:
+        print(f"Valid age: {age}")
+
+# Test cases
+ages = [25, -5, 200]
+
+for a in ages:
+    try:
+        validate_age(a)
+    except NegativeAgeError as e:
+        print(f"NegativeAgeError: {e} (You entered {e.age})")
+    except AgeExceedError as e:
+        print(f"AgeExceedError: {e}")
+
+# Output:
+# Valid age: 25
+# NegativeAgeError: Age cannot be negative (You entered -5)
+# AgeExceedError: Age 200 exceeds maximum limit of 150</code>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Tkinter provides GUI widgets; use <code>mainloop()</code> to start the event loop. User-defined exceptions: inherit from <code>Exception</code>, define __init__, raise with <code>raise</code>, catch with <code>except</code>.</div></div>
+
+</div></div></div>
+
+<!-- Q4 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">4</div>
+<div class="q-text">
+  <span class="part-label">a)</span> List and explain clean-up actions with examples.
+  <br><span class="part-label">b)</span> Develop a Python program to implement a single try block with multiple except blocks and trace the code for its execution.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Clean-up Actions [4M]</div>
+<div class="concept-box"><strong>Clean-up actions</strong> are code that must execute regardless of whether an exception occurs or not. Python implements this using the <strong>finally</strong> block and the <strong>with</strong> statement.</div>
+
+<div class="step-group">
+<div class="step-label">1. finally block</div>
+<div class="step-body">
+<p>The <code>finally</code> block always executes — whether an exception occurred or not. Ideal for releasing resources.</p>
+<code class="math">def read_file(name):
+    f = None
+    try:
+        f = open(name, "r")
+        data = f.read()
+        print(data)
+    except FileNotFoundError:
+        print(f"File '{name}' not found!")
+    finally:
+        if f:
+            f.close()
+            print("File closed (cleanup done).")
+
+read_file("test.txt")      # if exists
+read_file("missing.txt")   # FileNotFoundError — finally still runs</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">2. with statement (Context Manager)</div>
+<div class="step-body">
+<p>The <code>with</code> statement automatically handles resource cleanup (calls <code>__exit__</code> method).</p>
+<code class="math">with open("demo.txt", "w") as f:
+    f.write("Hello!")
+# File is automatically closed after the with block
+# No need to call f.close() manually</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">3. Custom context manager using __enter__ and __exit__</div>
+<div class="step-body">
+<code class="math">class DatabaseConnection:
+    def __enter__(self):
+        print("Opening database connection")
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print("Closing database connection (cleanup)")
+        return False   # don't suppress exceptions
+
+with DatabaseConnection() as db:
+    print("Working with database...")
+    # raise Exception("DB Error")  # uncomment to test
+
+# Output:
+# Opening database connection
+# Working with database...
+# Closing database connection (cleanup)</code>
+</div></div>
+
+<div class="sub-question">Part (b): Single try with Multiple except Blocks [4M]</div>
+
+<div class="step-group">
+<div class="step-label">Program</div>
+<div class="step-body">
+<code class="math">def multi_except_demo(a, b):
+    try:
+        print("--- try block begins ---")
+        result = a / b                         # may raise ZeroDivisionError
+        lst    = [10, 20, 30]
+        print(lst[int(result)])                # may raise IndexError
+        val    = int("abc")                    # may raise ValueError
+        print("Result:", result)
+        print("--- try block ends normally ---")
+    except ZeroDivisionError:
+        print("Caught: ZeroDivisionError – division by zero")
+    except IndexError:
+        print("Caught: IndexError – list index out of range")
+    except ValueError:
+        print("Caught: ValueError – invalid value")
+    except Exception as e:
+        print("Caught general exception:", e)
+    finally:
+        print("--- finally block always runs ---")
+
+# Test 1: ZeroDivisionError
+print("=== Test 1 ===")
+multi_except_demo(10, 0)
+
+# Test 2: IndexError (10/2=5, lst[5] out of range)
+print("\n=== Test 2 ===")
+multi_except_demo(10, 2)
+
+# Trace for Test 1:
+# --- try block begins ---
+# Caught: ZeroDivisionError – division by zero
+# --- finally block always runs ---
+
+# Trace for Test 2:
+# --- try block begins ---
+# Caught: IndexError – list index out of range
+# --- finally block always runs ---</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Execution Trace Explanation</div>
+<div class="step-body">
+<p>1. Python enters the <code>try</code> block and executes statements sequentially.</p>
+<p>2. When an exception is raised, Python immediately <strong>stops</strong> the try block.</p>
+<p>3. Python checks each <code>except</code> clause in order — executes the first matching one.</p>
+<p>4. After the matching <code>except</code>, Python skips remaining except clauses.</p>
+<p>5. <code>finally</code> always runs last, regardless of exceptions.</p>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Clean-up actions use <code>finally</code> (always runs) and <code>with</code> (auto-cleanup). Multiple except blocks each handle a specific exception type; only the first matching one executes.</div></div>
+
+</div></div></div>
+
+<!-- Q5 -->
+<div class="q-card" onclick="toggle(this)">
+<div class="q-header"><div class="q-num">5</div>
+<div class="q-text">
+  <span class="part-label">a)</span> Is it possible to implement multiple exception blocks in Python exception handling? Justify your answer.
+  <br><span class="part-label">b)</span> Explain the purpose of 'else' and 'finally' blocks in exception handling with a Python program.
+</div>
+<div class="q-toggle">▾</div></div>
+<div class="q-body"><div class="q-body-inner">
+
+<div class="sub-question">Part (a): Multiple Except Blocks [4M]</div>
+<div class="concept-box"><strong>Yes, Python fully supports multiple except blocks</strong> in a single try-except construct. Each except block handles a different type of exception.</div>
+
+<div class="step-group">
+<div class="step-label">Justification and Rules</div>
+<div class="step-body">
+<p>1. A single try block can have <strong>any number</strong> of except blocks.</p>
+<p>2. Python checks except clauses <strong>in order</strong> and executes only the <strong>first matching</strong> one.</p>
+<p>3. More specific exceptions should come <strong>before</strong> more general ones.</p>
+<p>4. A bare <code>except:</code> or <code>except Exception:</code> catches everything — place it <strong>last</strong>.</p>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Example with 5 different except blocks</div>
+<div class="step-body">
+<code class="math">def test_exceptions(data, idx, divisor):
+    try:
+        lst    = data
+        val    = lst[idx]           # may cause IndexError
+        num    = int(val)           # may cause ValueError
+        result = 100 / divisor     # may cause ZeroDivisionError
+        d      = {"a": 1}
+        print(d[val])              # may cause KeyError
+    except IndexError as e:
+        print(f"IndexError: {e}")
+    except ValueError as e:
+        print(f"ValueError: {e}")
+    except ZeroDivisionError as e:
+        print(f"ZeroDivisionError: {e}")
+    except KeyError as e:
+        print(f"KeyError: {e}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
+# Different errors triggered:
+test_exceptions([1, 2], 10, 2)    # IndexError
+test_exceptions(["abc"], 0, 2)    # ValueError
+test_exceptions([5], 0, 0)        # ZeroDivisionError</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Catching multiple exceptions in ONE block</div>
+<div class="step-body">
+<code class="math">try:
+    x = int("abc")
+except (ValueError, TypeError) as e:
+    print("Value or Type error:", e)</code>
+</div></div>
+
+<div class="sub-question">Part (b): else and finally Blocks [4M]</div>
+<div class="concept-box">
+<strong>else:</strong> Executes ONLY if no exception was raised in the try block.<br>
+<strong>finally:</strong> ALWAYS executes whether an exception occurred or not.
+</div>
+
+<div class="step-group">
+<div class="step-label">Full Example Demonstrating Both</div>
+<div class="step-body">
+<code class="math">def file_operation(filename):
+    try:
+        print("Opening file...")
+        f = open(filename, "r")
+        data = f.read()
+    except FileNotFoundError:
+        print(f"Error: '{filename}' not found!")
+    else:
+        # Runs only if no exception
+        print("File read successfully!")
+        print("Content:", data[:50])  # print first 50 chars
+        f.close()
+    finally:
+        # Always runs
+        print("Operation complete (finally block).\n")
+
+file_operation("existing.txt")    # if file exists
+file_operation("ghost.txt")       # file doesn't exist
+
+# === if existing.txt exists ===
+# Opening file...
+# File read successfully!
+# Content: (first 50 chars)
+# Operation complete (finally block).
+
+# === if ghost.txt missing ===
+# Opening file...
+# Error: 'ghost.txt' not found!
+# Operation complete (finally block).</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Summary of Complete try-except-else-finally Structure</div>
+<div class="step-body">
+<code class="math">try:
+    # code that might raise an exception
+
+except SpecificError:
+    # runs if SpecificError is raised
+
+except Exception as e:
+    # runs if any other exception is raised
+
+else:
+    # runs ONLY if NO exception was raised in try
+
+finally:
+    # ALWAYS runs – exception or not (cleanup here)</code>
+</div></div>
+
+<div class="step-group">
+<div class="step-label">Execution Flow Summary</div>
+<div class="step-body">
+<p><strong>No exception:</strong> try → else → finally</p>
+<p><strong>Exception caught:</strong> try (partial) → except → finally</p>
+<p><strong>Exception not caught:</strong> try (partial) → finally → exception propagates</p>
+</div></div>
+
+<div class="ans-box"><div class="ans-icon">✅</div>
+<div class="ans-text">Yes — multiple except blocks are fully supported; Python matches the first applicable one. <code>else</code> runs only on success (no exception); <code>finally</code> always runs for guaranteed cleanup.</div></div>
+
+</div></div></div>
+
+</div><!-- end u5 -->
+</div><!-- container -->
+
+<script>
+function toggle(card){ card.classList.toggle('open'); }
+function switchTab(id){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = ['u3','u4','u5'].indexOf(id);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function expandAll(id){
+  document.querySelectorAll('#' + id + ' .q-card').forEach(c => c.classList.add('open'));
+}
+function collapseAll(id){
+  document.querySelectorAll('#' + id + ' .q-card').forEach(c => c.classList.remove('open'));
+}
+</script>
+<p style="text-align:center; margin-top:2rem; font-size:0.85rem;">by shaik yusuf john</p>
+</body>
+</html>
