@@ -907,3 +907,66 @@ code{
   translateY(-3px)
   scale(1.03);
 }
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  padding: 60px 20px;
+  background: #0b1120;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-box {
+  width: 100%;
+  max-width: 1100px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 10px 40px rgba(37, 99, 235, 0.4);
+  transition: 0.3s ease;
+}
+
+.footer-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(37, 99, 235, 0.6);
+}
+
+.footer-box h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.footer-box p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: #cbd5e1;
+}
+
+.footer-credit {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
