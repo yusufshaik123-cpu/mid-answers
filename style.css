@@ -220,24 +220,37 @@ body{
 
 .subjects-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:35px;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  align-items:stretch;
 }
 
 .subject-card{
   position:relative;
+
   background:white;
-  padding:45px 35px;
-  border-radius:24px;
+
+  padding:40px 30px;
+
+  border-radius:22px;
+
   text-decoration:none;
+
   overflow:hidden;
-  transition:.45s;
+
+  transition:.4s;
 
   box-shadow:
-  0 10px 35px rgba(0,0,0,.06),
-  0 2px 6px rgba(0,0,0,.04);
+  0 8px 25px rgba(0,0,0,.06),
+  0 2px 5px rgba(0,0,0,.04);
 
   border:1px solid #e5e7eb;
+
+  min-height:240px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
 }
 
 .subject-card::before{
@@ -328,34 +341,23 @@ body{
 }
 
 /* =========================
-   FOOTER
+   SUBJECT PAGE HEADER
 ========================= */
 
-footer{
-  background:#0f172a;
-  color:white;
-  text-align:center;
-  padding:35px;
-}
-
-/* =========================
-   SUBJECT HEADER
-========================= */
-
-header{
+.subject-header{
   background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
   color:white;
   text-align:center;
   padding:2.5rem 1.5rem 2rem;
 }
 
-header h1{
+.subject-header h1{
   font-size:2.5rem;
   margin-bottom:10px;
   font-weight:800;
 }
 
-header p{
+.subject-header p{
   opacity:.92;
 }
 
@@ -655,7 +657,7 @@ header p{
 }
 
 /* =========================
-   PYTHON / DS EXTRA
+   EXTRA UTILITIES
 ========================= */
 
 .part-label{
@@ -744,26 +746,7 @@ header p{
 }
 
 /* =========================
-   TEXT FIXES
-========================= */
-
-.step-body p,
-.concept-box p,
-.q-text,
-.note,
-.ans-text{
-  opacity:1 !important;
-}
-
-.q-text,
-.step-body,
-.concept-box,
-.note{
-  overflow-wrap:break-word;
-}
-
-/* =========================
-   CODE FIXES
+   UTILITIES
 ========================= */
 
 pre{
@@ -772,6 +755,13 @@ pre{
 
 code{
   font-family:Consolas, monospace;
+}
+
+.q-text,
+.step-body,
+.concept-box,
+.note{
+  overflow-wrap:break-word;
 }
 
 /* =========================
@@ -810,10 +800,10 @@ code{
    RESPONSIVE
 ========================= */
 
-@media(max-width:992px){
+@media(max-width:900px){
 
-  .hero-content h1{
-    font-size:3.8rem;
+  .subjects-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
 }
@@ -863,6 +853,14 @@ code{
 
 }
 
+@media(max-width:600px){
+
+  .subjects-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
 @media(max-width:500px){
 
   .hero-content h1{
@@ -874,4 +872,38 @@ code{
     text-align:center;
   }
 
+}
+/* =========================
+   DOCS TOP BUTTON
+========================= */
+
+.docs-top-btn{
+  text-decoration:none;
+
+  background:white;
+  color:#1e3a8a;
+
+  padding:12px 22px;
+
+  border-radius:14px;
+
+  font-weight:700;
+
+  transition:.3s;
+
+  box-shadow:
+  0 4px 14px rgba(0,0,0,.15);
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.docs-top-btn:hover{
+  background:#2563eb;
+  color:white;
+
+  transform:
+  translateY(-3px)
+  scale(1.03);
 }
